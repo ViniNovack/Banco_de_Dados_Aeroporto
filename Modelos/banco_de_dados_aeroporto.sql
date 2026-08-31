@@ -87,13 +87,16 @@ use gerenciador_de_pista_aeroporto;
  create table Operacao_de_Solo(
 	id_operacao_solo int not null auto_increment,
     id_infraestrutura int,
+    proxima_operacao int,
     origem varchar(50),
     destino varchar(50),
     data_inicio datetime,
     data_termino datetime,
     primary key(id_operacao_solo),
     foreign key(id_infraestrutura)
-    references Infraestrutura(id_infraestrutura)
+    references Infraestrutura(id_infraestrutura),
+    foreign key(proxima_operacao)
+    references Operacao_de_Solo(id_operacao_solo)
  );
  
 create table Operacao_de_Rota(
@@ -139,7 +142,7 @@ add column id_aeronave int;
 
 alter table operacao_de_rota
 add foreign key(id_aeronave)
-references aeronave(id_companhia);
+references aeronave(id_aeronave);
 
 create table usuario(
 	id_usuario int not null auto_increment,
@@ -180,4 +183,42 @@ create table operacoes_rota__funcionario(
     references operacao_de_rota(id_operacao_rota),
     foreign key(id_funcionario)
     references funcionario(id_usuario)
+);
+
+create table terceiro(
+	id_usuario int not null auto_increment,
+    id_companhia int not null,
+    motivo_de_acesso varchar(100),
+    numero_de_identificacao varchar(20),
+    validade_de_acesso date,
+    primary key(id_usuario),
+    foreign key(id_usuario)
+    references usuario(id_usuario),
+    foreign key(id_companhia)
+    references companhia(id_companhia)
+);
+
+create table solicitacao(
+	id_solicitacao int not null auto_increment,
+    id_funcionario int not null,
+    id_aeronave int not null,
+    data date,
+    prazo date,
+    conteudo text,
+    status varchar(20),
+    primary key(id_solicitacao),
+    foreign key(id_funcionario)
+    references funcionario(id_usuario),
+    foreign key(id_aeronave)
+    references aeronave(id_aeronave)
+);
+
+create table terceiros_solicitacoes(
+	id_terceiro int not null,
+    id_solicitacao int not null,
+    primary key(id_terceiro, id_solicitacao),
+    foreign key(id_terceiro)
+    references terceiro(id_usuario),
+    foreign key(id_solicitacao)
+    references solicitacao(id_solicitacao)
 );
