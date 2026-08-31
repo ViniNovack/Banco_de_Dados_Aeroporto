@@ -996,7 +996,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Modelo Lógico" id="modeloLogico001">
-    <mxGraphModel dx="3567" dy="3339" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="2400" math="0" shadow="0">
+    <mxGraphModel dx="3484" dy="3211" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="2400" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1340,7 +1340,7 @@
         <mxCell id="fk_Terceiro_0_Usuario" edge="1" parent="1" source="tbl_Terceiro_row0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=1;endSize=6;startArrow=none;strokeColor=#666666;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.947;entryY=1.2;entryDx=0;entryDy=0;jettySize=auto;orthogonalLoop=1;entryPerimeter=0;" target="tbl_Usuario_row4" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="fk_Terceiro_1_Companhia" edge="1" parent="1" source="tbl_Terceiro_row1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=1;endSize=6;startArrow=none;strokeColor=#666666;exitX=0;exitY=0.5;exitDx=0;exitDy=0;jettySize=auto;orthogonalLoop=1;" value="">
+        <mxCell id="fk_Terceiro_1_Companhia" edge="1" parent="1" source="tbl_Terceiro_row1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=1;endSize=6;startArrow=none;strokeColor=#666666;exitX=0;exitY=0.5;exitDx=0;exitDy=0;jettySize=auto;orthogonalLoop=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="tbl_Companhia_row4" value="">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1970" y="-140" as="targetPoint" />
           </mxGeometry>
