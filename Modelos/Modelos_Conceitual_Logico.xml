@@ -996,7 +996,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Modelo Lógico" id="modeloLogico001">
-    <mxGraphModel dx="2404" dy="2955" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="2400" math="0" shadow="0">
+    <mxGraphModel dx="2412" dy="2863" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="2400" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1264,10 +1264,10 @@
         <mxCell id="XnllOryEV0r3wp6n1hLL-5" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=2;overflow=visible;" value="FK id_aeronave&amp;nbsp;&lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="430" y="78" as="geometry" />
         </mxCell>
-        <mxCell id="tbl_Solicitacao_row3" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        data_solicitacao&amp;nbsp;&lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;DATE default current date&lt;/span&gt;" vertex="1">
+        <mxCell id="tbl_Solicitacao_row3" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        data_solicitacao&amp;nbsp;&lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;DATETIME default (current_date())&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="430" y="104" as="geometry" />
         </mxCell>
-        <mxCell id="tbl_Solicitacao_row4" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        prazo &lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;DATE CHECK&amp;nbsp; (prazo &amp;gt; data)&lt;/span&gt;" vertex="1">
+        <mxCell id="tbl_Solicitacao_row4" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        prazo &lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;DATETIME&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="430" y="130" as="geometry" />
         </mxCell>
         <mxCell id="tbl_Solicitacao_row5" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        conteúdo &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;TEXT&lt;/span&gt;" vertex="1">
