@@ -1,192 +1,428 @@
--- ==========================================================
--- Infraestrutura (12 registros)
--- ==========================================================
-INSERT INTO Infraestrutura (localizacao, ocupado, largura, comprimento) VALUES
-('Pátio de Manobras Norte', TRUE, 45.50, 220.00),
-('Pátio de Manobras Sul', FALSE, 42.00, 210.50),
-('Cabeceira da Pista 15', TRUE, 60.00, 300.00),
-('Cabeceira da Pista 33', FALSE, 60.00, 300.00),
-('Taxiway Alpha - Trecho 1', FALSE, 23.00, 450.00),
-('Taxiway Bravo - Trecho 1', TRUE, 23.00, 380.00),
-('Área de Hangares - Setor A', FALSE, 80.00, 150.00),
-('Área de Hangares - Setor B', TRUE, 75.00, 140.00),
-('Terminal de Passageiros 1', TRUE, 120.00, 500.00),
-('Terminal de Passageiros 2', FALSE, 110.00, 480.00),
-('Pátio de Carga', TRUE, 55.00, 260.00),
-('Área de Manutenção Externa', FALSE, 90.00, 175.00);
+-- Lote 2: aeronaves 51 a 100, mesma cadeia completa do lote 1 + complemento
+-- Rodar depois de inserts.sql e inserts_complemento.sql, nessa ordem, sem nada pelo meio.
 
--- ==========================================================
--- Area_de_Manobra (6 registros)
--- ==========================================================
-INSERT INTO Area_de_Manobra (designacao, categoria_ICAO, elevacao, id_infraestrutura) VALUES
-('Área de Manobra Norte', 'CAT I', 908.50, 1),
-('Área de Manobra Sul', 'CAT II', 905.30, 3),
-('Área de Manobra Leste', 'CAT III', 910.10, 5),
-('Área de Manobra Oeste', 'CAT I', 902.75, 7),
-('Área de Manobra Central', 'CAT II', 907.00, 9),
-('Área de Manobra Auxiliar', 'CAT I', 899.60, 11);
+USE gerenciador_de_pista_aeroporto;
 
--- ==========================================================
--- Pista (4 registros)
--- ==========================================================
-INSERT INTO Pista (designacao, peso_maximo_suportado, iluminacao_de_aproximacao, id_area_manobra) VALUES
-('15/33', 396000.00, TRUE, 1),
-('11/29', 285000.00, FALSE, 2),
-('02/20', 350000.00, TRUE, 3),
-('07/25', 180000.00, TRUE, 4);
-
--- ==========================================================
--- Pista_de_Taxi (4 registros)
--- ==========================================================
-INSERT INTO Pista_de_Taxi (designacao, sentido_de_traego, velocidade_maxima, id_area_manobra) VALUES
-('A1', 'Único', 25, 2),
-('B2', 'Duplo', 30, 4),
-('C3', 'Único', 20, 5),
-('D4', 'Duplo', 35, 6);
-
--- ==========================================================
--- Hangar (3 registros)
--- ==========================================================
-INSERT INTO Hangar (capacidade, tipo, area, id_infraestrutura) VALUES
-(6, 'Manutenção Pesada', 1200.00, 2),
-(3, 'Manutenção Leve', 650.00, 6),
-(10, 'Armazenamento', 1800.00, 10);
-
--- ==========================================================
--- Portao (6 registros)
--- ==========================================================
-INSERT INTO Portao (id_infraestrutura, numero, tipo_de_embarque, terminal) VALUES
-(4, 'A1', 'Ponte de embarque', 'Terminal 1'),
-(7, 'A2', 'Escada móvel', 'Terminal 1'),
-(8, 'B1', 'Ponte de embarque', 'Terminal 1'),
-(9, 'B2', 'Ônibus de pátio', 'Terminal 2'),
-(10, 'C1', 'Ponte de embarque', 'Terminal 2'),
-(12, 'C2', 'Escada móvel', 'Terminal 2');
-
--- ==========================================================
--- companhia (5 registros)
--- ==========================================================
-INSERT INTO companhia (nome, cnpj, status, pais, dominio) VALUES
-('LATAM Airlines Brasil', '02012862000160', 'Ativa', 'Brasil', 'latamairlines.com'),
-('GOL Linhas Aéreas', '07575651000159', 'Ativa', 'Brasil', 'voegol.com.br'),
-('Azul Linhas Aéreas', '09296295000160', 'Ativa', 'Brasil', 'voeazul.com.br'),
-('Emirates', '10293847560012', 'Ativa', 'Emirados Árabes Unidos', 'emirates.com'),
-('American Airlines', '55667788000199', 'Suspensa', 'Estados Unidos', 'aa.com');
-
--- ==========================================================
--- aeronave (8 registros)
--- ==========================================================
+-- aeronave (50 registros, ids esperados 51 a 100)
 INSERT INTO aeronave (id_companhia, codigo, licenciada, status) VALUES
-(1, 'PT-MXA', TRUE, 'Operacional'),
-(1, 'PT-MXB', TRUE, 'Em manutenção'),
-(2, 'PR-GOA', TRUE, 'Operacional'),
-(2, 'PR-GOB', FALSE, 'Aguardando inspeção'),
-(3, 'PS-AZC', TRUE, 'Operacional'),
-(4, 'A6-EMK', TRUE, 'Operacional'),
-(4, 'A6-EML', TRUE, 'Em manutenção'),
-(5, 'N778AA', FALSE, 'Operacional');
+(1, 'PT-BYA', TRUE, 'Aguardando inspeção'),
+(2, 'PR-BZB', TRUE, 'Operacional'),
+(3, 'PS-CAC', TRUE, 'Em manutenção'),
+(4, 'A6-CBD', TRUE, 'Aguardando inspeção'),
+(5, 'N754AA', FALSE, 'Operacional'),
+(6, 'F-CDA', TRUE, 'Em manutenção'),
+(7, 'D-CEB', TRUE, 'Aguardando inspeção'),
+(8, 'A7-CFC', TRUE, 'Operacional'),
+(9, 'CS-CGD', TRUE, 'Em manutenção'),
+(10, 'HK-CHE', TRUE, 'Aguardando inspeção'),
+(1, 'PT-CIA', FALSE, 'Operacional'),
+(2, 'PR-CJB', TRUE, 'Em manutenção'),
+(3, 'PS-CKC', TRUE, 'Aguardando inspeção'),
+(4, 'A6-CLD', TRUE, 'Operacional'),
+(5, 'N764AA', TRUE, 'Em manutenção'),
+(6, 'F-CNA', TRUE, 'Aguardando inspeção'),
+(7, 'D-COB', FALSE, 'Operacional'),
+(8, 'A7-CPC', TRUE, 'Em manutenção'),
+(9, 'CS-CQD', TRUE, 'Aguardando inspeção'),
+(10, 'HK-CRE', TRUE, 'Operacional'),
+(1, 'PT-CSA', TRUE, 'Em manutenção'),
+(2, 'PR-CTB', TRUE, 'Aguardando inspeção'),
+(3, 'PS-CUC', FALSE, 'Operacional'),
+(4, 'A6-CVD', TRUE, 'Em manutenção'),
+(5, 'N774AA', TRUE, 'Aguardando inspeção'),
+(6, 'F-CXA', TRUE, 'Operacional'),
+(7, 'D-CYB', TRUE, 'Em manutenção'),
+(8, 'A7-CZC', TRUE, 'Aguardando inspeção'),
+(9, 'CS-DAD', FALSE, 'Operacional'),
+(10, 'HK-DBE', TRUE, 'Em manutenção'),
+(1, 'PT-DCA', TRUE, 'Aguardando inspeção'),
+(2, 'PR-DDB', TRUE, 'Operacional'),
+(3, 'PS-DEC', TRUE, 'Em manutenção'),
+(4, 'A6-DFD', TRUE, 'Aguardando inspeção'),
+(5, 'N784AA', FALSE, 'Operacional'),
+(6, 'F-DHA', TRUE, 'Em manutenção'),
+(7, 'D-DIB', TRUE, 'Aguardando inspeção'),
+(8, 'A7-DJC', TRUE, 'Operacional'),
+(9, 'CS-DKD', TRUE, 'Em manutenção'),
+(10, 'HK-DLE', TRUE, 'Aguardando inspeção'),
+(1, 'PT-DMA', FALSE, 'Operacional'),
+(2, 'PR-DNB', TRUE, 'Em manutenção'),
+(3, 'PS-DOC', TRUE, 'Aguardando inspeção'),
+(4, 'A6-DPD', TRUE, 'Operacional'),
+(5, 'N794AA', TRUE, 'Em manutenção'),
+(6, 'F-DRA', TRUE, 'Aguardando inspeção'),
+(7, 'D-DSB', FALSE, 'Operacional'),
+(8, 'A7-DTC', TRUE, 'Em manutenção'),
+(9, 'CS-DUD', TRUE, 'Aguardando inspeção'),
+(10, 'HK-DVE', TRUE, 'Operacional');
 
--- ==========================================================
--- Operacao_de_Rota (8 registros)
--- ==========================================================
-INSERT INTO Operacao_de_Rota (origem, destino, data_inicio, data_termino, objetivo, id_aeronave) VALUES
-('CWB', 'GRU', '2026-03-02 07:15:00', '2026-03-02 08:20:00', 'Voo comercial de passageiros', 1),
-('GRU', 'CWB', '2026-03-02 20:10:00', '2026-03-02 21:15:00', 'Voo comercial de passageiros', 1),
-('CWB', 'GIG', '2026-04-10 09:00:00', '2026-04-10 10:35:00', 'Voo comercial de passageiros', 2),
-('CWB', 'BSB', '2026-05-14 06:45:00', '2026-05-14 08:30:00', 'Voo comercial de passageiros', 3),
-('CWB', 'MIA', '2026-06-01 23:30:00', '2026-06-02 07:10:00', 'Voo internacional de passageiros', 4),
-('CWB', 'EZE', '2026-06-20 14:00:00', '2026-06-20 17:45:00', 'Voo internacional de passageiros', 5),
-('GRU', 'DXB', '2026-07-08 22:00:00', '2026-07-09 18:30:00', 'Voo cargueiro', 6),
-('CWB', 'CGH', '2026-08-15 12:00:00', '2026-08-15 12:50:00', 'Reposicionamento de aeronave', 8);
+-- Operacao_de_Rota (50 registros, ids esperados 51 a 100)
+INSERT INTO Operacao_de_Rota (id_aeronave, origem, destino, data_inicio, data_termino, objetivo) VALUES
+(51, 'POA', 'CDG', '2026-03-24 07:00:00', '2026-03-24 10:00:00', 'Voo comercial de passageiros'),
+(52, 'REC', 'FRA', '2026-04-25 08:00:00', '2026-04-25 11:30:00', 'Voo internacional de passageiros'),
+(53, 'FOR', 'DOH', '2026-05-26 09:00:00', '2026-05-26 13:00:00', 'Voo cargueiro'),
+(54, 'MAO', 'CWB', '2026-06-27 10:00:00', '2026-06-27 14:30:00', 'Reposicionamento de aeronave'),
+(55, 'VCP', 'GRU', '2026-07-01 11:00:00', '2026-07-01 13:00:00', 'Voo fretado'),
+(56, 'CNF', 'GIG', '2026-08-02 12:00:00', '2026-08-02 14:30:00', 'Voo comercial de passageiros'),
+(57, 'LIS', 'BSB', '2026-09-03 13:00:00', '2026-09-03 16:00:00', 'Voo internacional de passageiros'),
+(58, 'CDG', 'MIA', '2026-10-04 14:00:00', '2026-10-04 17:30:00', 'Voo cargueiro'),
+(59, 'FRA', 'JFK', '2026-11-05 15:00:00', '2026-11-05 19:00:00', 'Reposicionamento de aeronave'),
+(60, 'DOH', 'EZE', '2026-12-06 16:00:00', '2026-12-06 20:30:00', 'Voo fretado'),
+(61, 'CWB', 'DXB', '2026-01-07 17:00:00', '2026-01-07 19:00:00', 'Voo comercial de passageiros'),
+(62, 'GRU', 'CGH', '2026-02-08 18:00:00', '2026-02-08 20:30:00', 'Voo internacional de passageiros'),
+(63, 'GIG', 'SDU', '2026-03-09 19:00:00', '2026-03-09 22:00:00', 'Voo cargueiro'),
+(64, 'BSB', 'POA', '2026-04-10 20:00:00', '2026-04-10 23:30:00', 'Reposicionamento de aeronave'),
+(65, 'MIA', 'REC', '2026-05-11 05:00:00', '2026-05-11 09:00:00', 'Voo fretado'),
+(66, 'JFK', 'FOR', '2026-06-12 06:00:00', '2026-06-12 10:30:00', 'Voo comercial de passageiros'),
+(67, 'EZE', 'MAO', '2026-07-13 07:00:00', '2026-07-13 09:00:00', 'Voo internacional de passageiros'),
+(68, 'DXB', 'VCP', '2026-08-14 08:00:00', '2026-08-14 10:30:00', 'Voo cargueiro'),
+(69, 'CGH', 'CNF', '2026-09-15 09:00:00', '2026-09-15 12:00:00', 'Reposicionamento de aeronave'),
+(70, 'SDU', 'LIS', '2026-10-16 10:00:00', '2026-10-16 13:30:00', 'Voo fretado'),
+(71, 'POA', 'CDG', '2026-11-17 11:00:00', '2026-11-17 15:00:00', 'Voo comercial de passageiros'),
+(72, 'REC', 'FRA', '2026-12-18 12:00:00', '2026-12-18 16:30:00', 'Voo internacional de passageiros'),
+(73, 'FOR', 'DOH', '2026-01-19 13:00:00', '2026-01-19 15:00:00', 'Voo cargueiro'),
+(74, 'MAO', 'CWB', '2026-02-20 14:00:00', '2026-02-20 16:30:00', 'Reposicionamento de aeronave'),
+(75, 'VCP', 'GRU', '2026-03-21 15:00:00', '2026-03-21 18:00:00', 'Voo fretado'),
+(76, 'CNF', 'GIG', '2026-04-22 16:00:00', '2026-04-22 19:30:00', 'Voo comercial de passageiros'),
+(77, 'LIS', 'BSB', '2026-05-23 17:00:00', '2026-05-23 21:00:00', 'Voo internacional de passageiros'),
+(78, 'CDG', 'MIA', '2026-06-24 18:00:00', '2026-06-24 22:30:00', 'Voo cargueiro'),
+(79, 'FRA', 'JFK', '2026-07-25 19:00:00', '2026-07-25 21:00:00', 'Reposicionamento de aeronave'),
+(80, 'DOH', 'EZE', '2026-08-26 20:00:00', '2026-08-26 22:30:00', 'Voo fretado'),
+(81, 'CWB', 'DXB', '2026-09-27 05:00:00', '2026-09-27 08:00:00', 'Voo comercial de passageiros'),
+(82, 'GRU', 'CGH', '2026-10-01 06:00:00', '2026-10-01 09:30:00', 'Voo internacional de passageiros'),
+(83, 'GIG', 'SDU', '2026-11-02 07:00:00', '2026-11-02 11:00:00', 'Voo cargueiro'),
+(84, 'BSB', 'POA', '2026-12-03 08:00:00', '2026-12-03 12:30:00', 'Reposicionamento de aeronave'),
+(85, 'MIA', 'REC', '2026-01-04 09:00:00', '2026-01-04 11:00:00', 'Voo fretado'),
+(86, 'JFK', 'FOR', '2026-02-05 10:00:00', '2026-02-05 12:30:00', 'Voo comercial de passageiros'),
+(87, 'EZE', 'MAO', '2026-03-06 11:00:00', '2026-03-06 14:00:00', 'Voo internacional de passageiros'),
+(88, 'DXB', 'VCP', '2026-04-07 12:00:00', '2026-04-07 15:30:00', 'Voo cargueiro'),
+(89, 'CGH', 'CNF', '2026-05-08 13:00:00', '2026-05-08 17:00:00', 'Reposicionamento de aeronave'),
+(90, 'SDU', 'LIS', '2026-06-09 14:00:00', '2026-06-09 18:30:00', 'Voo fretado'),
+(91, 'POA', 'CDG', '2026-07-10 15:00:00', '2026-07-10 17:00:00', 'Voo comercial de passageiros'),
+(92, 'REC', 'FRA', '2026-08-11 16:00:00', '2026-08-11 18:30:00', 'Voo internacional de passageiros'),
+(93, 'FOR', 'DOH', '2026-09-12 17:00:00', '2026-09-12 20:00:00', 'Voo cargueiro'),
+(94, 'MAO', 'CWB', '2026-10-13 18:00:00', '2026-10-13 21:30:00', 'Reposicionamento de aeronave'),
+(95, 'VCP', 'GRU', '2026-11-14 19:00:00', '2026-11-14 23:00:00', 'Voo fretado'),
+(96, 'CNF', 'GIG', '2026-12-15 20:00:00', '2026-12-15 23:30:00', 'Voo comercial de passageiros'),
+(97, 'LIS', 'BSB', '2026-01-16 05:00:00', '2026-01-16 07:00:00', 'Voo internacional de passageiros'),
+(98, 'CDG', 'MIA', '2026-02-17 06:00:00', '2026-02-17 08:30:00', 'Voo cargueiro'),
+(99, 'FRA', 'JFK', '2026-03-18 07:00:00', '2026-03-18 10:00:00', 'Reposicionamento de aeronave'),
+(100, 'DOH', 'EZE', '2026-04-19 08:00:00', '2026-04-19 11:30:00', 'Voo fretado');
 
--- ==========================================================
--- Operacao_de_Solo (8 registros)
--- proxima_operacao entra como NULL e é encadeada depois com UPDATE,
--- já que algumas operações apontam para uma próxima que ainda não existe no momento do insert
--- ==========================================================
-INSERT INTO Operacao_de_Solo (id_infraestrutura, proxima_operacao, origem, destino, data_inicio, data_termino, id_operacao_rota) VALUES
-(9, NULL, 'Portão A1', 'Taxiway Alpha', '2026-03-02 06:40:00', '2026-03-02 07:00:00', 1),
-(5, NULL, 'Taxiway Alpha', 'Cabeceira da Pista 15', '2026-03-02 07:00:00', '2026-03-02 07:15:00', 1),
-(4, NULL, 'Cabeceira da Pista 33', 'Taxiway Bravo', '2026-03-02 21:15:00', '2026-03-02 21:30:00', 2),
-(10, NULL, 'Taxiway Bravo', 'Portão C1', '2026-03-02 21:30:00', '2026-03-02 21:45:00', 2),
-(9, NULL, 'Portão A2', 'Taxiway Alpha', '2026-04-10 08:35:00', '2026-04-10 08:55:00', 3),
-(11, NULL, 'Pátio de Carga', 'Taxiway Bravo', '2026-07-08 21:00:00', '2026-07-08 21:20:00', 7),
-(6, NULL, 'Taxiway Bravo', 'Cabeceira da Pista 07', '2026-07-08 21:20:00', '2026-07-08 21:50:00', 7),
-(8, NULL, 'Hangar Setor B', 'Portão B1', '2026-08-15 11:30:00', '2026-08-15 11:50:00', 8);
+-- Infraestrutura (50 registros, ids esperados 63 a 112, um portao por aeronave)
+INSERT INTO Infraestrutura (localizacao, ocupado, largura, comprimento) VALUES
+('Portão T3-17 - Terminal 3', FALSE, 12.00, 19.00),
+('Portão T1-18 - Terminal 1', TRUE, 13.00, 20.00),
+('Portão T2-18 - Terminal 2', FALSE, 14.00, 21.00),
+('Portão T3-18 - Terminal 3', FALSE, 15.00, 22.00),
+('Portão T1-19 - Terminal 1', TRUE, 16.00, 23.00),
+('Portão T2-19 - Terminal 2', FALSE, 12.00, 24.00),
+('Portão T3-19 - Terminal 3', FALSE, 13.00, 18.00),
+('Portão T1-20 - Terminal 1', TRUE, 14.00, 19.00),
+('Portão T2-20 - Terminal 2', FALSE, 15.00, 20.00),
+('Portão T3-20 - Terminal 3', FALSE, 16.00, 21.00),
+('Portão T1-21 - Terminal 1', TRUE, 12.00, 22.00),
+('Portão T2-21 - Terminal 2', FALSE, 13.00, 23.00),
+('Portão T3-21 - Terminal 3', FALSE, 14.00, 24.00),
+('Portão T1-22 - Terminal 1', TRUE, 15.00, 18.00),
+('Portão T2-22 - Terminal 2', FALSE, 16.00, 19.00),
+('Portão T3-22 - Terminal 3', FALSE, 12.00, 20.00),
+('Portão T1-23 - Terminal 1', TRUE, 13.00, 21.00),
+('Portão T2-23 - Terminal 2', FALSE, 14.00, 22.00),
+('Portão T3-23 - Terminal 3', FALSE, 15.00, 23.00),
+('Portão T1-24 - Terminal 1', TRUE, 16.00, 24.00),
+('Portão T2-24 - Terminal 2', FALSE, 12.00, 18.00),
+('Portão T3-24 - Terminal 3', FALSE, 13.00, 19.00),
+('Portão T1-25 - Terminal 1', TRUE, 14.00, 20.00),
+('Portão T2-25 - Terminal 2', FALSE, 15.00, 21.00),
+('Portão T3-25 - Terminal 3', FALSE, 16.00, 22.00),
+('Portão T1-26 - Terminal 1', TRUE, 12.00, 23.00),
+('Portão T2-26 - Terminal 2', FALSE, 13.00, 24.00),
+('Portão T3-26 - Terminal 3', FALSE, 14.00, 18.00),
+('Portão T1-27 - Terminal 1', TRUE, 15.00, 19.00),
+('Portão T2-27 - Terminal 2', FALSE, 16.00, 20.00),
+('Portão T3-27 - Terminal 3', FALSE, 12.00, 21.00),
+('Portão T1-28 - Terminal 1', TRUE, 13.00, 22.00),
+('Portão T2-28 - Terminal 2', FALSE, 14.00, 23.00),
+('Portão T3-28 - Terminal 3', FALSE, 15.00, 24.00),
+('Portão T1-29 - Terminal 1', TRUE, 16.00, 18.00),
+('Portão T2-29 - Terminal 2', FALSE, 12.00, 19.00),
+('Portão T3-29 - Terminal 3', FALSE, 13.00, 20.00),
+('Portão T1-30 - Terminal 1', TRUE, 14.00, 21.00),
+('Portão T2-30 - Terminal 2', FALSE, 15.00, 22.00),
+('Portão T3-30 - Terminal 3', FALSE, 16.00, 23.00),
+('Portão T1-31 - Terminal 1', TRUE, 12.00, 24.00),
+('Portão T2-31 - Terminal 2', FALSE, 13.00, 18.00),
+('Portão T3-31 - Terminal 3', FALSE, 14.00, 19.00),
+('Portão T1-32 - Terminal 1', TRUE, 15.00, 20.00),
+('Portão T2-32 - Terminal 2', FALSE, 16.00, 21.00),
+('Portão T3-32 - Terminal 3', FALSE, 12.00, 22.00),
+('Portão T1-33 - Terminal 1', TRUE, 13.00, 23.00),
+('Portão T2-33 - Terminal 2', FALSE, 14.00, 24.00),
+('Portão T3-33 - Terminal 3', FALSE, 15.00, 18.00),
+('Portão T1-34 - Terminal 1', TRUE, 16.00, 19.00);
 
-UPDATE Operacao_de_Solo SET proxima_operacao = 2 WHERE id_operacao_solo = 1;
-UPDATE Operacao_de_Solo SET proxima_operacao = 4 WHERE id_operacao_solo = 3;
-UPDATE Operacao_de_Solo SET proxima_operacao = 7 WHERE id_operacao_solo = 6;
+-- Portao (50 registros, especializacao das Infraestrutura ids 63 a 112)
+INSERT INTO Portao (id_portao, numero, tipo_de_embarque, terminal) VALUES
+(63, 'T3-17', 'Ônibus de pátio', 'Terminal 3'),
+(64, 'T1-18', 'Ponte de embarque', 'Terminal 1'),
+(65, 'T2-18', 'Escada móvel', 'Terminal 2'),
+(66, 'T3-18', 'Ônibus de pátio', 'Terminal 3'),
+(67, 'T1-19', 'Ponte de embarque', 'Terminal 1'),
+(68, 'T2-19', 'Escada móvel', 'Terminal 2'),
+(69, 'T3-19', 'Ônibus de pátio', 'Terminal 3'),
+(70, 'T1-20', 'Ponte de embarque', 'Terminal 1'),
+(71, 'T2-20', 'Escada móvel', 'Terminal 2'),
+(72, 'T3-20', 'Ônibus de pátio', 'Terminal 3'),
+(73, 'T1-21', 'Ponte de embarque', 'Terminal 1'),
+(74, 'T2-21', 'Escada móvel', 'Terminal 2'),
+(75, 'T3-21', 'Ônibus de pátio', 'Terminal 3'),
+(76, 'T1-22', 'Ponte de embarque', 'Terminal 1'),
+(77, 'T2-22', 'Escada móvel', 'Terminal 2'),
+(78, 'T3-22', 'Ônibus de pátio', 'Terminal 3'),
+(79, 'T1-23', 'Ponte de embarque', 'Terminal 1'),
+(80, 'T2-23', 'Escada móvel', 'Terminal 2'),
+(81, 'T3-23', 'Ônibus de pátio', 'Terminal 3'),
+(82, 'T1-24', 'Ponte de embarque', 'Terminal 1'),
+(83, 'T2-24', 'Escada móvel', 'Terminal 2'),
+(84, 'T3-24', 'Ônibus de pátio', 'Terminal 3'),
+(85, 'T1-25', 'Ponte de embarque', 'Terminal 1'),
+(86, 'T2-25', 'Escada móvel', 'Terminal 2'),
+(87, 'T3-25', 'Ônibus de pátio', 'Terminal 3'),
+(88, 'T1-26', 'Ponte de embarque', 'Terminal 1'),
+(89, 'T2-26', 'Escada móvel', 'Terminal 2'),
+(90, 'T3-26', 'Ônibus de pátio', 'Terminal 3'),
+(91, 'T1-27', 'Ponte de embarque', 'Terminal 1'),
+(92, 'T2-27', 'Escada móvel', 'Terminal 2'),
+(93, 'T3-27', 'Ônibus de pátio', 'Terminal 3'),
+(94, 'T1-28', 'Ponte de embarque', 'Terminal 1'),
+(95, 'T2-28', 'Escada móvel', 'Terminal 2'),
+(96, 'T3-28', 'Ônibus de pátio', 'Terminal 3'),
+(97, 'T1-29', 'Ponte de embarque', 'Terminal 1'),
+(98, 'T2-29', 'Escada móvel', 'Terminal 2'),
+(99, 'T3-29', 'Ônibus de pátio', 'Terminal 3'),
+(100, 'T1-30', 'Ponte de embarque', 'Terminal 1'),
+(101, 'T2-30', 'Escada móvel', 'Terminal 2'),
+(102, 'T3-30', 'Ônibus de pátio', 'Terminal 3'),
+(103, 'T1-31', 'Ponte de embarque', 'Terminal 1'),
+(104, 'T2-31', 'Escada móvel', 'Terminal 2'),
+(105, 'T3-31', 'Ônibus de pátio', 'Terminal 3'),
+(106, 'T1-32', 'Ponte de embarque', 'Terminal 1'),
+(107, 'T2-32', 'Escada móvel', 'Terminal 2'),
+(108, 'T3-32', 'Ônibus de pátio', 'Terminal 3'),
+(109, 'T1-33', 'Ponte de embarque', 'Terminal 1'),
+(110, 'T2-33', 'Escada móvel', 'Terminal 2'),
+(111, 'T3-33', 'Ônibus de pátio', 'Terminal 3'),
+(112, 'T1-34', 'Ponte de embarque', 'Terminal 1');
 
--- ==========================================================
--- usuario (10 registros)
--- ==========================================================
-INSERT INTO usuario (nome, cpf, e_mail, endereco, senha) VALUES
-('Fernanda Souza Lima', '32165498700', 'fernanda.lima@aeroservico.com.br', 'Rua das Araucárias, 120, Curitiba - PR', 'x9F2aQ81zM'),
-('Ricardo Almeida Torres', '45632178900', 'ricardo.torres@aeroservico.com.br', 'Av. Cândido de Abreu, 540, Curitiba - PR', 'p7Lk3Vb92T'),
-('Juliana Ferreira Prado', '78945612300', 'juliana.prado@aeroservico.com.br', 'Rua XV de Novembro, 890, Curitiba - PR', 'zR5tY0nQ44'),
-('Marcos Vinícius Rocha', '65498732100', 'marcos.rocha@aeroservico.com.br', 'Rua Marechal Deodoro, 310, Curitiba - PR', 'a1Wc8Ef37U'),
-('Camila Duarte Nunes', '15975346800', 'camila.nunes@aeroservico.com.br', 'Av. Sete de Setembro, 2200, Curitiba - PR', 'q9Xz4Rt10L'),
-('Eduardo Barbosa Melo', '85274196300', 'eduardo.melo@fornecedorxyz.com', 'Rua José Loureiro, 45, Curitiba - PR', 'm3Bn7Yp62K'),
-('Patrícia Gomes Vieira', '96385274100', 'patricia.vieira@aviacaocargo.com', 'Av. Marechal Floriano, 1030, São José dos Pinhais - PR', 'v6Cd1Ho93S'),
-('André Luiz Cardoso', '75319864200', 'andre.cardoso@voegol.com.br', 'Rua Comendador Araújo, 670, Curitiba - PR', 'j2Pf5Nm81R'),
-('Bianca Ramos Teixeira', '14725836900', 'bianca.teixeira@auditoriaexterna.com', 'Av. Iguaçu, 3100, Curitiba - PR', 'g8Qa3Ls74W'),
-('Rodrigo Castilho Nogueira', '25836914700', 'rodrigo.nogueira@consultoriasec.com', 'Rua Brigadeiro Franco, 1580, Curitiba - PR', 'h4Tz9Ju20D');
+-- Operacao_de_Solo (50 registros, 1 por rota 51-100, ligada ao portao correspondente)
+INSERT INTO Operacao_de_Solo (id_operacao_rota, id_infraestrutura, proxima_operacao, origem, destino, data_inicio, data_termino) VALUES
+(51, 63, NULL, 'Portão T3-17', 'Pista de decolagem (POA)', '2026-03-24 06:40:00', '2026-03-24 07:00:00'),
+(52, 64, NULL, 'Portão T1-18', 'Pista de decolagem (REC)', '2026-04-25 07:40:00', '2026-04-25 08:00:00'),
+(53, 65, NULL, 'Portão T2-18', 'Pista de decolagem (FOR)', '2026-05-26 08:40:00', '2026-05-26 09:00:00'),
+(54, 66, NULL, 'Portão T3-18', 'Pista de decolagem (MAO)', '2026-06-27 09:40:00', '2026-06-27 10:00:00'),
+(55, 67, NULL, 'Portão T1-19', 'Pista de decolagem (VCP)', '2026-07-01 10:40:00', '2026-07-01 11:00:00'),
+(56, 68, NULL, 'Portão T2-19', 'Pista de decolagem (CNF)', '2026-08-02 11:40:00', '2026-08-02 12:00:00'),
+(57, 69, NULL, 'Portão T3-19', 'Pista de decolagem (LIS)', '2026-09-03 12:40:00', '2026-09-03 13:00:00'),
+(58, 70, NULL, 'Portão T1-20', 'Pista de decolagem (CDG)', '2026-10-04 13:40:00', '2026-10-04 14:00:00'),
+(59, 71, NULL, 'Portão T2-20', 'Pista de decolagem (FRA)', '2026-11-05 14:40:00', '2026-11-05 15:00:00'),
+(60, 72, NULL, 'Portão T3-20', 'Pista de decolagem (DOH)', '2026-12-06 15:40:00', '2026-12-06 16:00:00'),
+(61, 73, NULL, 'Portão T1-21', 'Pista de decolagem (CWB)', '2026-01-07 16:40:00', '2026-01-07 17:00:00'),
+(62, 74, NULL, 'Portão T2-21', 'Pista de decolagem (GRU)', '2026-02-08 17:40:00', '2026-02-08 18:00:00'),
+(63, 75, NULL, 'Portão T3-21', 'Pista de decolagem (GIG)', '2026-03-09 18:40:00', '2026-03-09 19:00:00'),
+(64, 76, NULL, 'Portão T1-22', 'Pista de decolagem (BSB)', '2026-04-10 19:40:00', '2026-04-10 20:00:00'),
+(65, 77, NULL, 'Portão T2-22', 'Pista de decolagem (MIA)', '2026-05-11 04:40:00', '2026-05-11 05:00:00'),
+(66, 78, NULL, 'Portão T3-22', 'Pista de decolagem (JFK)', '2026-06-12 05:40:00', '2026-06-12 06:00:00'),
+(67, 79, NULL, 'Portão T1-23', 'Pista de decolagem (EZE)', '2026-07-13 06:40:00', '2026-07-13 07:00:00'),
+(68, 80, NULL, 'Portão T2-23', 'Pista de decolagem (DXB)', '2026-08-14 07:40:00', '2026-08-14 08:00:00'),
+(69, 81, NULL, 'Portão T3-23', 'Pista de decolagem (CGH)', '2026-09-15 08:40:00', '2026-09-15 09:00:00'),
+(70, 82, NULL, 'Portão T1-24', 'Pista de decolagem (SDU)', '2026-10-16 09:40:00', '2026-10-16 10:00:00'),
+(71, 83, NULL, 'Portão T2-24', 'Pista de decolagem (POA)', '2026-11-17 10:40:00', '2026-11-17 11:00:00'),
+(72, 84, NULL, 'Portão T3-24', 'Pista de decolagem (REC)', '2026-12-18 11:40:00', '2026-12-18 12:00:00'),
+(73, 85, NULL, 'Portão T1-25', 'Pista de decolagem (FOR)', '2026-01-19 12:40:00', '2026-01-19 13:00:00'),
+(74, 86, NULL, 'Portão T2-25', 'Pista de decolagem (MAO)', '2026-02-20 13:40:00', '2026-02-20 14:00:00'),
+(75, 87, NULL, 'Portão T3-25', 'Pista de decolagem (VCP)', '2026-03-21 14:40:00', '2026-03-21 15:00:00'),
+(76, 88, NULL, 'Portão T1-26', 'Pista de decolagem (CNF)', '2026-04-22 15:40:00', '2026-04-22 16:00:00'),
+(77, 89, NULL, 'Portão T2-26', 'Pista de decolagem (LIS)', '2026-05-23 16:40:00', '2026-05-23 17:00:00'),
+(78, 90, NULL, 'Portão T3-26', 'Pista de decolagem (CDG)', '2026-06-24 17:40:00', '2026-06-24 18:00:00'),
+(79, 91, NULL, 'Portão T1-27', 'Pista de decolagem (FRA)', '2026-07-25 18:40:00', '2026-07-25 19:00:00'),
+(80, 92, NULL, 'Portão T2-27', 'Pista de decolagem (DOH)', '2026-08-26 19:40:00', '2026-08-26 20:00:00'),
+(81, 93, NULL, 'Portão T3-27', 'Pista de decolagem (CWB)', '2026-09-27 04:40:00', '2026-09-27 05:00:00'),
+(82, 94, NULL, 'Portão T1-28', 'Pista de decolagem (GRU)', '2026-10-01 05:40:00', '2026-10-01 06:00:00'),
+(83, 95, NULL, 'Portão T2-28', 'Pista de decolagem (GIG)', '2026-11-02 06:40:00', '2026-11-02 07:00:00'),
+(84, 96, NULL, 'Portão T3-28', 'Pista de decolagem (BSB)', '2026-12-03 07:40:00', '2026-12-03 08:00:00'),
+(85, 97, NULL, 'Portão T1-29', 'Pista de decolagem (MIA)', '2026-01-04 08:40:00', '2026-01-04 09:00:00'),
+(86, 98, NULL, 'Portão T2-29', 'Pista de decolagem (JFK)', '2026-02-05 09:40:00', '2026-02-05 10:00:00'),
+(87, 99, NULL, 'Portão T3-29', 'Pista de decolagem (EZE)', '2026-03-06 10:40:00', '2026-03-06 11:00:00'),
+(88, 100, NULL, 'Portão T1-30', 'Pista de decolagem (DXB)', '2026-04-07 11:40:00', '2026-04-07 12:00:00'),
+(89, 101, NULL, 'Portão T2-30', 'Pista de decolagem (CGH)', '2026-05-08 12:40:00', '2026-05-08 13:00:00'),
+(90, 102, NULL, 'Portão T3-30', 'Pista de decolagem (SDU)', '2026-06-09 13:40:00', '2026-06-09 14:00:00'),
+(91, 103, NULL, 'Portão T1-31', 'Pista de decolagem (POA)', '2026-07-10 14:40:00', '2026-07-10 15:00:00'),
+(92, 104, NULL, 'Portão T2-31', 'Pista de decolagem (REC)', '2026-08-11 15:40:00', '2026-08-11 16:00:00'),
+(93, 105, NULL, 'Portão T3-31', 'Pista de decolagem (FOR)', '2026-09-12 16:40:00', '2026-09-12 17:00:00'),
+(94, 106, NULL, 'Portão T1-32', 'Pista de decolagem (MAO)', '2026-10-13 17:40:00', '2026-10-13 18:00:00'),
+(95, 107, NULL, 'Portão T2-32', 'Pista de decolagem (VCP)', '2026-11-14 18:40:00', '2026-11-14 19:00:00'),
+(96, 108, NULL, 'Portão T3-32', 'Pista de decolagem (CNF)', '2026-12-15 19:40:00', '2026-12-15 20:00:00'),
+(97, 109, NULL, 'Portão T1-33', 'Pista de decolagem (LIS)', '2026-01-16 04:40:00', '2026-01-16 05:00:00'),
+(98, 110, NULL, 'Portão T2-33', 'Pista de decolagem (CDG)', '2026-02-17 05:40:00', '2026-02-17 06:00:00'),
+(99, 111, NULL, 'Portão T3-33', 'Pista de decolagem (FRA)', '2026-03-18 06:40:00', '2026-03-18 07:00:00'),
+(100, 112, NULL, 'Portão T1-34', 'Pista de decolagem (DOH)', '2026-04-19 07:40:00', '2026-04-19 08:00:00');
 
--- ==========================================================
--- setor (4 registros)
--- ==========================================================
-INSERT INTO setor (nome, funcao) VALUES
-('Operações de Pátio', 'Coordenar o tráfego de aeronaves em solo'),
-('Manutenção Aeroportuária', 'Realizar manutenção preventiva e corretiva da infraestrutura'),
-('Segurança Aeroportuária', 'Controlar acesso e monitorar áreas restritas'),
-('Atendimento ao Passageiro', 'Prestar suporte a passageiros nos terminais');
+-- operacoes_rota_funcionario (50 registros, 1 funcionario acompanhando cada rota 51-100)
+INSERT INTO operacoes_rota_funcionario (id_operacao_rota, id_funcionario) VALUES
+(51, 1),
+(52, 2),
+(53, 3),
+(54, 4),
+(55, 5),
+(56, 6),
+(57, 7),
+(58, 8),
+(59, 9),
+(60, 10),
+(61, 1),
+(62, 2),
+(63, 3),
+(64, 4),
+(65, 5),
+(66, 6),
+(67, 7),
+(68, 8),
+(69, 9),
+(70, 10),
+(71, 1),
+(72, 2),
+(73, 3),
+(74, 4),
+(75, 5),
+(76, 6),
+(77, 7),
+(78, 8),
+(79, 9),
+(80, 10),
+(81, 1),
+(82, 2),
+(83, 3),
+(84, 4),
+(85, 5),
+(86, 6),
+(87, 7),
+(88, 8),
+(89, 9),
+(90, 10),
+(91, 1),
+(92, 2),
+(93, 3),
+(94, 4),
+(95, 5),
+(96, 6),
+(97, 7),
+(98, 8),
+(99, 9),
+(100, 10);
 
--- ==========================================================
--- funcionario (5 registros)
--- id_usuario reaproveita os ids 1 a 5 de usuario
--- ==========================================================
-INSERT INTO funcionario (id_usuario, id_setor, matricula, cargo, data_admissao, status) VALUES
-(1, 1, 'FN-1001', 'Controladora de Pátio', '2021-02-15', 'Ativo'),
-(2, 2, 'FN-1002', 'Técnico de Manutenção', '2019-08-01', 'Ativo'),
-(3, 3, 'FN-1003', 'Agente de Segurança', '2022-05-20', 'Ativo'),
-(4, 1, 'FN-1004', 'Supervisor de Pista', '2018-11-03', 'Ativo'),
-(5, 4, 'FN-1005', 'Atendente de Terminal', '2023-01-10', 'Afastado');
+-- solicitacao (50 registros, ids esperados 51 a 100, 1 por aeronave 51-100)
+INSERT INTO solicitacao (id_funcionario, id_aeronave, data_solicitacao, prazo, conteudo, status) VALUES
+(1, 51, '2026-03-24 13:00:00', '2026-03-27 17:00:00', 'Solicitação de vaga em hangar para manutenção preventiva', 'Concluída'),
+(2, 52, '2026-04-25 14:00:00', '2026-04-28 17:00:00', 'Autorização para pouso fora do horário padrão de operação', 'Recusada'),
+(3, 53, '2026-05-26 15:00:00', '2026-05-28 17:00:00', 'Reserva de posição de pátio para aeronave internacional', 'Pendente'),
+(4, 54, '2026-06-27 16:00:00', '2026-06-28 17:00:00', 'Vistoria de segurança para reposicionamento de aeronave', 'Aprovada'),
+(5, 55, '2026-07-01 08:00:00', '2026-07-04 17:00:00', 'Pedido de acesso ao pátio de cargas para inspeção de rotina', 'Concluída'),
+(6, 56, '2026-08-02 09:00:00', '2026-08-05 17:00:00', 'Solicitação de reboque para deslocamento entre hangar e portão', 'Recusada'),
+(7, 57, '2026-09-03 10:00:00', '2026-09-06 17:00:00', 'Pedido de prioridade de pouso por condição meteorológica', 'Pendente'),
+(8, 58, '2026-10-04 11:00:00', '2026-10-07 17:00:00', 'Solicitação de troca de portão de embarque', 'Aprovada'),
+(9, 59, '2026-11-05 12:00:00', '2026-11-08 17:00:00', 'Pedido de inspeção técnica antes da próxima decolagem', 'Concluída'),
+(10, 60, '2026-12-06 13:00:00', '2026-12-09 17:00:00', 'Solicitação de abastecimento fora do horário programado', 'Recusada'),
+(1, 61, '2026-01-07 14:00:00', '2026-01-10 17:00:00', 'Solicitação de vaga em hangar para manutenção preventiva', 'Pendente'),
+(2, 62, '2026-02-08 15:00:00', '2026-02-11 17:00:00', 'Autorização para pouso fora do horário padrão de operação', 'Aprovada'),
+(3, 63, '2026-03-09 16:00:00', '2026-03-12 17:00:00', 'Reserva de posição de pátio para aeronave internacional', 'Concluída'),
+(4, 64, '2026-04-10 08:00:00', '2026-04-13 17:00:00', 'Vistoria de segurança para reposicionamento de aeronave', 'Recusada'),
+(5, 65, '2026-05-11 09:00:00', '2026-05-14 17:00:00', 'Pedido de acesso ao pátio de cargas para inspeção de rotina', 'Pendente'),
+(6, 66, '2026-06-12 10:00:00', '2026-06-15 17:00:00', 'Solicitação de reboque para deslocamento entre hangar e portão', 'Aprovada'),
+(7, 67, '2026-07-13 11:00:00', '2026-07-16 17:00:00', 'Pedido de prioridade de pouso por condição meteorológica', 'Concluída'),
+(8, 68, '2026-08-14 12:00:00', '2026-08-17 17:00:00', 'Solicitação de troca de portão de embarque', 'Recusada'),
+(9, 69, '2026-09-15 13:00:00', '2026-09-18 17:00:00', 'Pedido de inspeção técnica antes da próxima decolagem', 'Pendente'),
+(10, 70, '2026-10-16 14:00:00', '2026-10-19 17:00:00', 'Solicitação de abastecimento fora do horário programado', 'Aprovada'),
+(1, 71, '2026-11-17 15:00:00', '2026-11-20 17:00:00', 'Solicitação de vaga em hangar para manutenção preventiva', 'Concluída'),
+(2, 72, '2026-12-18 16:00:00', '2026-12-21 17:00:00', 'Autorização para pouso fora do horário padrão de operação', 'Recusada'),
+(3, 73, '2026-01-19 08:00:00', '2026-01-22 17:00:00', 'Reserva de posição de pátio para aeronave internacional', 'Pendente'),
+(4, 74, '2026-02-20 09:00:00', '2026-02-23 17:00:00', 'Vistoria de segurança para reposicionamento de aeronave', 'Aprovada'),
+(5, 75, '2026-03-21 10:00:00', '2026-03-24 17:00:00', 'Pedido de acesso ao pátio de cargas para inspeção de rotina', 'Concluída'),
+(6, 76, '2026-04-22 11:00:00', '2026-04-25 17:00:00', 'Solicitação de reboque para deslocamento entre hangar e portão', 'Recusada'),
+(7, 77, '2026-05-23 12:00:00', '2026-05-26 17:00:00', 'Pedido de prioridade de pouso por condição meteorológica', 'Pendente'),
+(8, 78, '2026-06-24 13:00:00', '2026-06-27 17:00:00', 'Solicitação de troca de portão de embarque', 'Aprovada'),
+(9, 79, '2026-07-25 14:00:00', '2026-07-28 17:00:00', 'Pedido de inspeção técnica antes da próxima decolagem', 'Concluída'),
+(10, 80, '2026-08-26 15:00:00', '2026-08-28 17:00:00', 'Solicitação de abastecimento fora do horário programado', 'Recusada'),
+(1, 81, '2026-09-27 16:00:00', '2026-09-28 17:00:00', 'Solicitação de vaga em hangar para manutenção preventiva', 'Pendente'),
+(2, 82, '2026-10-01 08:00:00', '2026-10-04 17:00:00', 'Autorização para pouso fora do horário padrão de operação', 'Aprovada'),
+(3, 83, '2026-11-02 09:00:00', '2026-11-05 17:00:00', 'Reserva de posição de pátio para aeronave internacional', 'Concluída'),
+(4, 84, '2026-12-03 10:00:00', '2026-12-06 17:00:00', 'Vistoria de segurança para reposicionamento de aeronave', 'Recusada'),
+(5, 85, '2026-01-04 11:00:00', '2026-01-07 17:00:00', 'Pedido de acesso ao pátio de cargas para inspeção de rotina', 'Pendente'),
+(6, 86, '2026-02-05 12:00:00', '2026-02-08 17:00:00', 'Solicitação de reboque para deslocamento entre hangar e portão', 'Aprovada'),
+(7, 87, '2026-03-06 13:00:00', '2026-03-09 17:00:00', 'Pedido de prioridade de pouso por condição meteorológica', 'Concluída'),
+(8, 88, '2026-04-07 14:00:00', '2026-04-10 17:00:00', 'Solicitação de troca de portão de embarque', 'Recusada'),
+(9, 89, '2026-05-08 15:00:00', '2026-05-11 17:00:00', 'Pedido de inspeção técnica antes da próxima decolagem', 'Pendente'),
+(10, 90, '2026-06-09 16:00:00', '2026-06-12 17:00:00', 'Solicitação de abastecimento fora do horário programado', 'Aprovada'),
+(1, 91, '2026-07-10 08:00:00', '2026-07-13 17:00:00', 'Solicitação de vaga em hangar para manutenção preventiva', 'Concluída'),
+(2, 92, '2026-08-11 09:00:00', '2026-08-14 17:00:00', 'Autorização para pouso fora do horário padrão de operação', 'Recusada'),
+(3, 93, '2026-09-12 10:00:00', '2026-09-15 17:00:00', 'Reserva de posição de pátio para aeronave internacional', 'Pendente'),
+(4, 94, '2026-10-13 11:00:00', '2026-10-16 17:00:00', 'Vistoria de segurança para reposicionamento de aeronave', 'Aprovada'),
+(5, 95, '2026-11-14 12:00:00', '2026-11-17 17:00:00', 'Pedido de acesso ao pátio de cargas para inspeção de rotina', 'Concluída'),
+(6, 96, '2026-12-15 13:00:00', '2026-12-18 17:00:00', 'Solicitação de reboque para deslocamento entre hangar e portão', 'Recusada'),
+(7, 97, '2026-01-16 14:00:00', '2026-01-19 17:00:00', 'Pedido de prioridade de pouso por condição meteorológica', 'Pendente'),
+(8, 98, '2026-02-17 15:00:00', '2026-02-20 17:00:00', 'Solicitação de troca de portão de embarque', 'Aprovada'),
+(9, 99, '2026-03-18 16:00:00', '2026-03-21 17:00:00', 'Pedido de inspeção técnica antes da próxima decolagem', 'Concluída'),
+(10, 100, '2026-04-19 08:00:00', '2026-04-22 17:00:00', 'Solicitação de abastecimento fora do horário programado', 'Recusada');
 
--- ==========================================================
--- operacoes_rota__funcionario (5 registros)
--- ==========================================================
-INSERT INTO operacoes_rota__funcionario (id_operacao_rota, id_funcionario) VALUES
-(1, 2),
-(2, 4),
-(3, 1),
-(5, 3),
-(7, 4);
-
--- ==========================================================
--- terceiro (5 registros)
--- id_usuario reaproveita os ids 6 a 10 de usuario, sem sobrepor os de funcionario
--- ==========================================================
-INSERT INTO terceiro (id_usuario, id_companhia, motivo_de_acesso, numero_de_identificacao, validade_de_acesso) VALUES
-(6, 1, 'Prestador de serviço de manutenção de aeronaves', 'TC-2201', '2026-12-31'),
-(7, 2, 'Fornecedor de combustível de aviação', 'TC-2202', '2026-10-15'),
-(8, 2, 'Representante comercial da companhia aérea', 'TC-2203', '2027-01-20'),
-(9, 3, 'Auditoria externa de segurança operacional', 'TC-2204', '2026-11-05'),
-(10, 4, 'Consultoria em segurança aeroportuária', 'TC-2205', '2027-03-12');
-
--- ==========================================================
--- solicitacao (4 registros)
--- ==========================================================
-INSERT INTO solicitacao (id_funcionario, id_aeronave, data, prazo, conteudo, status) VALUES
-(2, 1, '2026-03-01', '2026-03-05', 'Solicitação de vaga em hangar para manutenção preventiva', 'Aprovada'),
-(4, 4, '2026-05-30', '2026-06-01', 'Autorização para pouso fora do horário padrão de operação', 'Pendente'),
-(1, 6, '2026-06-15', '2026-06-18', 'Reserva de posição de pátio para aeronave internacional', 'Concluída'),
-(3, 8, '2026-08-10', '2026-08-12', 'Vistoria de segurança para reposicionamento de aeronave', 'Pendente');
-
--- ==========================================================
--- terceiros_solicitacoes (3 registros)
--- ==========================================================
+-- terceiros_solicitacoes (50 registros, 1 terceiro ligado a cada solicitacao 51-100)
 INSERT INTO terceiros_solicitacoes (id_terceiro, id_solicitacao) VALUES
-(6, 1),
-(8, 2),
-(9, 4);
+(11, 51),
+(12, 52),
+(13, 53),
+(14, 54),
+(15, 55),
+(16, 56),
+(17, 57),
+(18, 58),
+(19, 59),
+(20, 60),
+(11, 61),
+(12, 62),
+(13, 63),
+(14, 64),
+(15, 65),
+(16, 66),
+(17, 67),
+(18, 68),
+(19, 69),
+(20, 70),
+(11, 71),
+(12, 72),
+(13, 73),
+(14, 74),
+(15, 75),
+(16, 76),
+(17, 77),
+(18, 78),
+(19, 79),
+(20, 80),
+(11, 81),
+(12, 82),
+(13, 83),
+(14, 84),
+(15, 85),
+(16, 86),
+(17, 87),
+(18, 88),
+(19, 89),
+(20, 90),
+(11, 91),
+(12, 92),
+(13, 93),
+(14, 94),
+(15, 95),
+(16, 96),
+(17, 97),
+(18, 98),
+(19, 99),
+(20, 100);
