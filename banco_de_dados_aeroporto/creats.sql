@@ -9,7 +9,7 @@ use gerenciador_de_pista_aeroporto;
     localizacao varchar(100) UNIQUE,
     ocupado boolean,
     largura decimal(6,2),
-    comprimento decimal(6,2),
+    comprimento decimal(6,2)
  );
 
   create table Hangar(
@@ -17,7 +17,7 @@ use gerenciador_de_pista_aeroporto;
     capacidade int,
     tipo varchar(30),
     area decimal(8,2),
-    foreign key(id_hangar) references Infraestrutura(id_infraestrutura),
+    foreign key(id_hangar) references Infraestrutura(id_infraestrutura)
  );
 
  create table Area_de_Manobra(
@@ -25,7 +25,7 @@ use gerenciador_de_pista_aeroporto;
     designacao varchar(50),
     categoria_ICAO varchar(10),
     elevacao decimal(6, 2),
-    foreign key(id_area_manobra) references Infraestrutura(id_infraestrutura),
+    foreign key(id_area_manobra) references Infraestrutura(id_infraestrutura)
  );
 
   create table Portao(
@@ -33,7 +33,7 @@ use gerenciador_de_pista_aeroporto;
     numero varchar(10) UNIQUE,
     tipo_de_embarque varchar(30),
     terminal varchar(10),
-    foreign key(id_portao) references Infraestrutura(id_infraestrutura),
+    foreign key(id_portao) references Infraestrutura(id_infraestrutura)
  );
 
  create table Pista_de_Taxi(
@@ -41,7 +41,7 @@ use gerenciador_de_pista_aeroporto;
     designacao varchar(10),
     sentido_de_traego varchar(20),
     velocidade_maxima int,
-    foreign key(id_pista_taxi) references Area_de_Manobra(id_area_manobra),
+    foreign key(id_pista_taxi) references Area_de_Manobra(id_area_manobra)
  );
 
  
@@ -50,7 +50,7 @@ use gerenciador_de_pista_aeroporto;
     designacao varchar(10),
     peso_maximo_suportado decimal(8, 2),
     iluminacao_de_aproximacao boolean,
-    foreign key(id_pista) references Area_de_Manobra(id_area_manobra),
+    foreign key(id_pista) references Area_de_Manobra(id_area_manobra)
  );
 
  create table companhia(
@@ -59,7 +59,7 @@ use gerenciador_de_pista_aeroporto;
     cnpj char(14) UNIQUE,
     status varchar(20),
     pais varchar(50),
-    dominio varchar(50) UNIQUE,
+    dominio varchar(50) UNIQUE
 );
 
 create table aeronave(
@@ -104,13 +104,13 @@ create table usuario(
     cpf char(11) UNIQUE,
     e_mail varchar(45) UNIQUE,
     endereco varchar(150),
-    senha varchar(255),
+    senha varchar(255)
 );
 
 create table setor(
 	id_setor int primary key auto_increment,
     nome varchar(50),
-    funcao varchar(50),
+    funcao varchar(50)
 );
 
 create table funcionario(
@@ -125,7 +125,7 @@ create table funcionario(
     foreign key(id_setor)references setor(id_setor)
 );
 
-create table operacoes_rota__funcionario(
+create table operacoes_rota_funcionario(
 	id_operacao_rota int,
     id_funcionario int,
     primary key(id_operacao_rota, id_funcionario),
@@ -157,6 +157,6 @@ create table terceiros_solicitacoes(
 	id_terceiro int,
     id_solicitacao int,
     primary key(id_terceiro, id_solicitacao),
-    foreign key(id_terceiro) references terceiro(id_usuario),
+    foreign key(id_terceiro) references terceiro(id_terceiro),
     foreign key(id_solicitacao) references solicitacao(id_solicitacao)
 );
