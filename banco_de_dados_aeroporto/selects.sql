@@ -12,7 +12,9 @@
 
 -- ___________________ Exigidos pelo Professor____________________
 -- Operações por companhia (Para cada companhia: quantidade operações, origem, destino)
+
 -- Trechos de operação (Para operação, trechos sequenciais e pontos de infraestrutura)
+
 -- Solicitações por setor (Por setor: solicitações pendentes, aprovadas, rejeitadas)
 -- Ocupação de infraestrutura (Por ponto: ocupação atual, histórico, disponibilidade)
 -- Operadores por setor (Por setor: funcionários e volume processado)
