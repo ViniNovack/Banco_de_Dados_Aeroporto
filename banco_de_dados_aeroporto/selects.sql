@@ -21,7 +21,9 @@ group by op.id_operacao_rota, c.nome, op.origem, op.destino
 order by quant_op desc;
 
 -- Trechos de operação (Para operação, trechos sequenciais e pontos de infraestrutura)
-
+select r.id_operacao_rota, s.id_operacao_solo,
+case
+	when
 
 -- Solicitações por setor (Por setor: solicitações pendentes, aprovadas, rejeitadas)
 -- Ocupação de infraestrutura (Por ponto: ocupação atual, histórico, disponibilidade)
