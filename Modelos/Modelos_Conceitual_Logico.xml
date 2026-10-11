@@ -996,7 +996,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Modelo Lógico" id="modeloLogico001">
-    <mxGraphModel dx="2412" dy="2863" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="2400" math="0" shadow="0">
+    <mxGraphModel dx="2369" dy="2688" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="2400" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1078,8 +1078,11 @@
         <mxCell id="tbl_Pista_row4" parent="tbl_Pista" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="        iluminação_de_aproximação &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;BOOLEAN&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="320" y="104" as="geometry" />
         </mxCell>
+        <mxCell id="z14id-eO3OD-H6_Z-Y0T-1" edge="1" parent="1" source="tbl_PistaDeTaxi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="tbl_AreaDeManobra">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="tbl_PistaDeTaxi" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="PistaDeTaxi" vertex="1">
-          <mxGeometry height="132" width="320" x="-330" y="800" as="geometry" />
+          <mxGeometry height="132" width="320" x="-300" y="770" as="geometry" />
         </mxCell>
         <mxCell id="tbl_PistaDeTaxi_row0" parent="tbl_PistaDeTaxi" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=#fff2cc;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=1;overflow=visible;" value="PK, FK&amp;nbsp; id_pista_taxi &lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="320" y="26" as="geometry" />
@@ -1105,11 +1108,14 @@
         <mxCell id="tbl_Aeronave_row1" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=2;overflow=visible;" value="código&amp;nbsp;&lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;VARCHAR(10) UNIQUE&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="320" y="78" as="geometry" />
         </mxCell>
-        <mxCell id="tbl_Aeronave_row2" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="        licenciada &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;BOOLEAN&lt;/span&gt;" vertex="1">
+        <mxCell id="z14id-eO3OD-H6_Z-Y0T-2" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=2;overflow=visible;" value="tipo&amp;nbsp;&lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;VARCHAR(45)&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="320" y="104" as="geometry" />
         </mxCell>
-        <mxCell id="tbl_Aeronave_row3" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="        status (operante, em manutenção) &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(20)&lt;/span&gt;" vertex="1">
+        <mxCell id="tbl_Aeronave_row2" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="        licenciada &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;BOOLEAN&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="320" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Aeronave_row3" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="        status (operante, em manutenção) &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(20)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="156" as="geometry" />
         </mxCell>
         <mxCell id="tbl_Companhia" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Companhia" vertex="1">
           <mxGeometry height="156" width="320" x="1836" y="-300" as="geometry" />
@@ -1253,7 +1259,7 @@
           <mxGeometry height="26" width="320" y="78" as="geometry" />
         </mxCell>
         <mxCell id="tbl_Solicitacao" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Solicitacao" vertex="1">
-          <mxGeometry height="208" width="430" x="1710" y="920" as="geometry" />
+          <mxGeometry height="208" width="430" x="1720" y="920" as="geometry" />
         </mxCell>
         <mxCell id="tbl_Solicitacao_row0" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=#fff2cc;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=1;overflow=visible;" value="PK  id_solicitacao &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="430" y="26" as="geometry" />
@@ -1310,11 +1316,6 @@
             <mxPoint x="-570" y="640" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="fk_PistaDeTaxi_1_AreaDeManobra" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=1;endSize=6;startArrow=none;strokeColor=#666666;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;jettySize=auto;orthogonalLoop=1;" target="tbl_AreaDeManobra" value="">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-330" y="865" as="sourcePoint" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="fk_Aeronave_1_Companhia" edge="1" parent="1" source="tbl_Aeronave" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=1;endSize=6;startArrow=none;strokeColor=#666666;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;jettySize=auto;orthogonalLoop=1;" target="tbl_Companhia" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
@@ -1343,8 +1344,8 @@
             <mxPoint x="1970" y="-140" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="fk_Solicitacao_1_Funcionario" edge="1" parent="1" source="tbl_Solicitacao_row1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=1;endSize=6;startArrow=none;strokeColor=#666666;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;jettySize=auto;orthogonalLoop=1;" target="tbl_Funcionario" value="">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="fk_Solicitacao_1_Funcionario" edge="1" parent="1" source="tbl_Solicitacao_row1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=1;endSize=6;startArrow=none;strokeColor=#666666;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;jettySize=auto;orthogonalLoop=1;" target="tbl_Funcionario_row5" value="">
+          <mxGeometry relative="1" x="0.0324" as="geometry" />
         </mxCell>
         <mxCell id="fk_Solicitacao_2_Aeronave" edge="1" parent="1" source="tbl_Solicitacao_row4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=1;endSize=6;startArrow=none;strokeColor=#666666;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;jettySize=auto;orthogonalLoop=1;" target="tbl_Aeronave" value="">
           <mxGeometry relative="1" as="geometry">
