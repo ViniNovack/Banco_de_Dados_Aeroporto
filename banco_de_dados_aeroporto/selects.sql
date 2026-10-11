@@ -111,51 +111,7 @@ join companhia as c on c.id_companhia = t.id_companhia
 group by s.status, c.id_companhia, c.nome
 order by s.status;
 
--- Infraestrutura em manutenção: situação atual e histórico de datas.
-select i.id_infraestrutura, i.localizacao, i.em_manutencao,
-       m.data_inicio, m.previsao_termino, m.data_termino,
-       m.descricao, m.status as status_manutencao
-from infraestrutura i
-left join manutencao_infraestrutura m
-  on m.id_infraestrutura = i.id_infraestrutura and m.data_termino is null
-order by i.em_manutencao desc, m.previsao_termino;
-
--- Tempo médio por tipo: análise (início até fim) e decisão (fim da análise até decisão).
-select ts.id_tipo_solicitacao, ts.nome as tipo_solicitacao,
-       count(s.id_solicitacao) as total_solicitacoes,
-       round(avg(timestampdiff(minute, s.data_inicio_analise, s.data_fim_analise)), 2) as media_analise_minutos,
-       round(avg(timestampdiff(minute, s.data_fim_analise, s.data_decisao)), 2) as media_decisao_minutos
-from tipo_solicitacao ts
-left join solicitacao s on s.id_tipo_solicitacao = ts.id_tipo_solicitacao
-group by ts.id_tipo_solicitacao, ts.nome
-order by ts.nome;
-
--- Frotas por companhia: tipo, quantidade e capacidade total.
-select c.id_companhia, c.nome as companhia, a.tipo_aeronave,
-       count(a.id_aeronave) as quantidade_aeronaves,
-       sum(a.capacidade_passageiros) as capacidade_total_passageiros,
-       sum(a.capacidade_carga_kg) as capacidade_total_carga_kg
-from companhia c
-left join aeronave a on a.id_companhia = c.id_companhia
-group by c.id_companhia, c.nome, a.tipo_aeronave
-order by c.nome, a.tipo_aeronave;
-
--- Dashboard diário. Troque CURDATE() por uma data específica, se necessário.
-set @data_relatorio = curdate();
-select @data_relatorio as data_relatorio,
-    (select count(*) from operacao_de_rota r
-     where date(r.data_inicio) = @data_relatorio
-       and (lower(r.objetivo) like '%pous%' or lower(r.objetivo) like '%landing%')) as pousos,
-    (select count(*) from operacao_de_rota r
-     where date(r.data_inicio) = @data_relatorio
-       and (lower(r.objetivo) like '%decol%' or lower(r.objetivo) like '%takeoff%')) as decolagens,
-    (select count(*) from operacao_de_solo s
-     where date(s.data_inicio) = @data_relatorio) as movimentacoes_solo,
-    (select count(*) from incidente_operacional i
-     where date(i.data_hora) = @data_relatorio) as incidentes;
-
--- Histórico de incidentes por dia, gravidade e status.
-select date(data_hora) as dia, gravidade, status, count(*) as quantidade
-from incidente_operacional
-group by date(data_hora), gravidade, status
-order by dia desc, gravidade;
+-- Infraestrutura em manutenção (Pontos em manutenção com datas início e previsão término)
+-- Tempo de processamento (Por tipo solicitação: tempo médio análise e aprovação)
+-- Frotas por companhia (Para companhia: tipos de aeronaves e capacidade)
+-- Relatório operacional (Dashboard diário: pousos, decolagens, movimentações, incidentes)
