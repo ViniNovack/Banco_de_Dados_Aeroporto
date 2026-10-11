@@ -114,4 +114,9 @@ order by s.status;
 -- Infraestrutura em manutenção (Pontos em manutenção com datas início e previsão término)
 -- Tempo de processamento (Por tipo solicitação: tempo médio análise e aprovação)
 -- Frotas por companhia (Para companhia: tipos de aeronaves e capacidade)
+select c.nome, a.tipo_aeronave, count(a.id_aeronave) as qtd_aeronaves, a.capacidade_passageiros, a.capacidade_carga_kg from aeronave as a
+join companhia as c on c.id_companhia = a.id_companhia
+group by a.tipo_aeronave, c.nome, c.id_companhia, a.capacidade_passageiros, a.capacidade_carga_kg
+order by c.nome, a.tipo_aeronave;
+
 -- Relatório operacional (Dashboard diário: pousos, decolagens, movimentações, incidentes)
