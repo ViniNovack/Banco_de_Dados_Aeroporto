@@ -1,14 +1,181 @@
 -- _____________________________________________________________JOIN_____________________________________________________________
 -- Operações de rota de cada companhia
+SELECT 
+    c.nome AS nome_companhia,
+    a.codigo AS codigo_aeronave,
+    r.origem,
+    r.destino,
+    r.data_inicio
+FROM companhia c
+JOIN aeronave a ON a.id_companhia = c.id_companhia
+JOIN operacao_de_rota r ON r.id_aeronave = a.id_aeronave;
+
 -- Portões ocupados por operações de solo
+SELECT 
+    p.numero AS numero_portao,
+    p.terminal,
+    p.tipo_de_embarque,
+    os.origem,
+    os.destino,
+    os.data_inicio,
+    os.data_termino
+FROM portao p
+JOIN infraestrutura i ON i.id_infraestrutura = p.id_portao
+JOIN operacao_de_solo os ON os.id_infraestrutura = i.id_infraestrutura;
+
 -- Funcionários de cada operação de rota, com nome e setor
+SELECT 
+    r.id_operacao_rota,
+    r.origem,
+    r.destino,
+    u.nome AS nome_funcionario,
+    f.matricula,
+    s.nome AS nome_setor
+FROM operacao_de_rota r
+JOIN operacoes_rota_funcionario orf ON orf.id_operacao_rota = r.id_operacao_rota
+JOIN funcionario f ON f.id_funcionario = orf.id_funcionario
+JOIN usuario u ON u.id_usuario = f.id_funcionario
+JOIN setor s ON s.id_setor = f.id_setor;
 -- Operações de solo por companhia
+SELECT 
+    c.nome AS nome_companhia,
+    a.codigo AS aeronave,
+    os.id_operacao_solo,
+    os.origem AS solo_origem,
+    os.destino AS solo_destino,
+    os.data_inicio
+FROM companhia c
+JOIN aeronave a ON a.id_companhia = c.id_companhia
+JOIN operacao_de_rota r ON r.id_aeronave = a.id_aeronave
+JOIN operacao_de_solo os ON os.id_operacao_rota = r.id_operacao_rota;
 -- Terceiros, companhia e solicitações
+SELECT 
+    u.nome AS terceiro_nome,
+    c.nome AS companhia_parceira,
+    t.numero_de_identificacao,
+    s.id_solicitacao,
+    s.status AS status_solicitacao,
+    s.data_solicitacao
+FROM terceiro t
+JOIN usuario u ON u.id_usuario = t.id_terceiro
+JOIN companhia c ON c.id_companhia = t.id_companhia
+JOIN terceiros_solicitacoes ts ON ts.id_terceiro = t.id_terceiro
+JOIN solicitacao s ON s.id_solicitacao = ts.id_solicitacao;
 -- Solicitações por aeronave e funcionário responsável
+SELECT 
+    s.id_solicitacao,
+    a.codigo AS aeronave,
+    u.nome AS funcionario_responsavel,
+    f.cargo,
+    s.status,
+    s.prazo
+FROM solicitacao s
+JOIN aeronave a ON a.id_aeronave = s.id_aeronave
+JOIN funcionario f ON f.id_funcionario = s.id_funcionario
+JOIN usuario u ON u.id_usuario = f.id_funcionario;
+
 -- Aeronaves sem nenhuma operação de rota
+
+SELECT 
+    a.id_aeronave,
+    a.codigo,
+    a.tipo_aeronave,
+    a.status
+FROM aeronave a
+LEFT JOIN operacao_de_rota r ON r.id_aeronave = a.id_aeronave
+WHERE r.id_operacao_rota IS NULL;
+
 -- Pistas com designação, categoria ICAO e localização
+
+SELECT 
+    p.designacao AS designacao_pista,
+    p.peso_maximo_suportado,
+    am.categoria_ICAO,
+    am.elevacao,
+    i.localizacao
+FROM pista p
+JOIN area_de_manobra am ON am.id_area_manobra = p.id_pista
+JOIN infraestrutura i ON i.id_infraestrutura = am.id_area_manobra;
+
 -- Solicitações abertas por cada setor
+
+SELECT 
+    st.nome AS setor,
+    u.nome AS funcionario,
+    s.id_solicitacao,
+    s.status,
+    s.data_solicitacao
+FROM setor st
+JOIN funcionario f ON f.id_setor = st.id_setor
+JOIN usuario u ON u.id_usuario = f.id_funcionario
+JOIN solicitacao s ON s.id_funcionario = f.id_funcionario
+WHERE s.status IN ('Pendente', 'Em análise', 'Em analise');
+
 -- Sequência de operações de solo encadeadas
+
+SELECT 
+    atual.id_operacao_solo AS operacao_atual,
+    atual.origem AS origem_atual,
+    atual.destino AS destino_atual,
+    prox.id_operacao_solo AS operacao_seguinte,
+    prox.origem AS origem_seguinte,
+    prox.destino AS destino_seguinte
+FROM operacao_de_solo atual
+JOIN operacao_de_solo prox ON prox.id_operacao_solo = atual.proxima_operacao;
+
+-- Companhias com frota ativa expressiva
+
+SELECT 
+    c.nome AS companhia,
+    COUNT(a.id_aeronave) AS total_aeronaves
+FROM companhia c
+JOIN aeronave a ON a.id_companhia = c.id_companhia
+GROUP BY c.id_companhia, c.nome
+HAVING COUNT(a.id_aeronave) > 3
+ORDER BY total_aeronaves DESC;
+
+-- Aeronaves de uso intenso
+
+SELECT 
+    a.codigo AS prefixo_aeronave,
+    COUNT(r.id_operacao_rota) AS total_operacoes
+FROM aeronave a
+JOIN operacao_de_rota r ON r.id_aeronave = a.id_aeronave
+GROUP BY a.id_aeronave, a.codigo
+HAVING COUNT(r.id_operacao_rota) > 10
+ORDER BY total_operacoes DESC;
+
+-- Setores de grande porte
+
+SELECT 
+    s.nome AS setor,
+    COUNT(f.id_funcionario) AS total_funcionarios
+FROM setor s
+JOIN funcionario f ON f.id_setor = s.id_setor
+GROUP BY s.id_setor, s.nome
+HAVING COUNT(f.id_funcionario) > 2
+ORDER BY total_funcionarios DESC;
+
+-- Origens com alto tráfego aéreo
+
+SELECT 
+    r.origem,
+    COUNT(r.id_operacao_rota) AS total_voos
+FROM operacao_de_rota r
+GROUP BY r.origem
+HAVING COUNT(r.id_operacao_rota) > 20
+ORDER BY total_voos DESC;
+
+-- Tipos de solicitação mais recorrentes
+
+SELECT 
+    ts.nome AS tipo_solicitacao,
+    COUNT(s.id_solicitacao) AS total_solicitacoes
+FROM tipo_solicitacao ts
+JOIN solicitacao s ON s.id_tipo_solicitacao = ts.id_tipo_solicitacao
+GROUP BY ts.id_tipo_solicitacao, ts.nome
+HAVING COUNT(s.id_solicitacao) >= 5
+ORDER BY total_solicitacoes DESC;
 
 
 -- _____________________________________________________________Exigidos pelo Professor_____________________________________________________________
