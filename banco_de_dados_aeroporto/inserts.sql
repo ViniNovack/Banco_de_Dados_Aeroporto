@@ -330,7 +330,7 @@ INSERT INTO aeronave (id_aeronave, id_companhia, codigo, tipo_aeronave, capacida
 (47, 10, 'HK-2019', 'Embraer E195', 132, 12000.00, FALSE, 'Em manutenção'),
 (48, 10, 'HK-5178', 'Boeing 737', 189, 20000.00, TRUE, 'Operacional'),
 (49, 10, 'HK-3955', 'Airbus A320', 180, 18000.00, TRUE, 'Operacional'),
-(50, 10, 'HK-8542', TRUE, 'Operacional');
+(50, 10, 'HK-8542', 'Airbus A320', 180, 18000.00, TRUE, 'Operacional');
 
 -- Operacao_de_Rota (360), em ordem cronologica
 INSERT INTO Operacao_de_Rota (id_operacao_rota, id_aeronave, origem, destino, data_inicio, data_termino, objetivo) VALUES
