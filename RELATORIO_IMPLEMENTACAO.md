@@ -5,7 +5,7 @@ Preparar o esquema para suportar quatro relatórios que estavam apenas como tóp
 
 ## Arquivos alterados
 - `banco_de_dados_aeroporto/creats.sql`: ampliação do esquema por meio dos próprios `CREATE TABLE` e campos definidos na criação; nenhum `ALTER TABLE` foi utilizado.
-- `banco_de_dados_aeroporto/inserts.sql`: dados de demonstração para manutenção, tipos de solicitação, capacidades/tipos de aeronave, tempos de processamento e incidentes.
+- `banco_de_dados_aeroporto/inserts.sql`: dados de demonstração para manutenção, tipos de solicitação, capacidades/tipos de aeronave, tempos de processamento e incidentes. O histórico de manutenção foi ampliado para 30 registros e o de incidentes para 83 registros.
 - `banco_de_dados_aeroporto/selects.sql`: implementação dos quatro relatórios, consulta de incidentes por dia e correção da agregação de operações por companhia e de solicitações por setor.
 - `Modelos/Conceptual_Logical_Models.xml` e `Modelos/Modelos_Conceitual_Logico.xml`: inclusão de campos e entidades de relatório na página lógica e nota explicativa na página conceitual.
 - `RELATORIO_IMPLEMENTACAO.md`: este documento.
@@ -32,7 +32,9 @@ Preparar o esquema para suportar quatro relatórios que estavam apenas como tóp
 - O dashboard diário retorna pousos, decolagens, movimentações de solo e incidentes para `@data_relatorio`, inicialmente definida como `CURDATE()`.
 
 ## Dados de demonstração
-O arquivo de carga adiciona exemplos para que os relatórios tenham dados com os quais trabalhar. Os tipos e capacidades atribuídos à frota, tempos de processamento e incidentes são **dados fictícios para demonstração**, não dados operacionais reais. As datas de manutenção/incidentes acompanham o cenário de exemplo já existente no script.
+O arquivo de carga foi ampliado para acompanhar melhor o volume das tabelas operacionais já existentes. O cenário possui 360 operações de rota e 101 solicitações; os novos dados agora incluem **30 registros de manutenção de infraestrutura** (2 iniciais + 28 adicionais) e **83 incidentes operacionais** (3 iniciais + 80 adicionais), além dos 5 tipos de solicitação usados para classificar as 101 solicitações. O histórico adicional de manutenção está distribuído por diferentes infraestruturas e datas, e os incidentes estão distribuídos pelos dias finais do cenário de demonstração.
+
+Os tipos e capacidades atribuídos à frota, tempos de processamento, manutenções e incidentes são **dados fictícios para demonstração**, não dados operacionais reais. Os registros históricos adicionais não mudam o estado atual de manutenção definido no cenário; o registro da Taxiway Charlie continua representando a manutenção em andamento na data de referência.
 
 ## Como executar
 1. Execute `banco_de_dados_aeroporto/creats.sql`.
