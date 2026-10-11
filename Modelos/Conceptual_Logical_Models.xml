@@ -1023,24 +1023,12 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="tbl_Infraestrutura" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=12;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Infrastructure" vertex="1">
-          <mxGeometry height="182" width="320" x="-160" y="170" as="geometry" />
-        </mxCell>
-        <mxCell id="tbl_Infraestrutura_row0" parent="tbl_Infraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=#fff2cc;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=1;overflow=visible;" value="PK  id_infrastructure &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="26" as="geometry" />
-        </mxCell>
-        <mxCell id="tbl_Infraestrutura_row1" parent="tbl_Infraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        location &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(100)&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="52" as="geometry" />
-        </mxCell>
-        <mxCell id="tbl_Infraestrutura_row2" parent="tbl_Infraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        occupied &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;BOOLEAN&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="78" as="geometry" />
-        </mxCell>
-        <mxCell id="tbl_Infraestrutura_row3" parent="tbl_Infraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        width &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DECIMAL(6,2)&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="104" as="geometry" />
-        </mxCell>
-        <mxCell id="tbl_Infraestrutura_row4" parent="tbl_Infraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        length &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DECIMAL(6,2)&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="130" as="geometry" />
-        </mxCell>        <mxCell id="tbl_Infraestrutura_reportrow5" parent="tbl_Infraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="under_maintenance BOOLEAN DEFAULT FALSE" vertex="1"><mxGeometry height="26" width="320" y="156" as="geometry" /></mxCell>
+        
+        
+        
+        
+        
+                
 
         <mxCell id="tbl_AreaDeManobra" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=12;align=center;verticalAlign=middle;whiteSpace=wrap;" value="ManeuveringArea" vertex="1">
           <mxGeometry height="156" width="320" x="-295" y="680" as="geometry" />
@@ -1132,26 +1120,14 @@
         <mxCell id="tbl_PistaDeTaxi_row4" parent="tbl_PistaDeTaxi" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        max_speed (km/h) &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="320" y="130" as="geometry" />
         </mxCell>
-        <mxCell id="tbl_Aeronave" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=12;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Aircraft" vertex="1">
-          <mxGeometry height="208" width="320" x="1170" y="-200" as="geometry" />
-        </mxCell>
-        <mxCell id="tbl_Aeronave_row0" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=#fff2cc;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=1;overflow=visible;" value="PK id_aircraft&amp;nbsp;&lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="26" as="geometry" />
-        </mxCell>
-        <mxCell id="XnllOryEV0r3wp6n1hLL-4" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=2;overflow=visible;" value="FK id_company &lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="52" as="geometry" />
-        </mxCell>
-        <mxCell id="tbl_Aeronave_row1" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=2;overflow=visible;" value="code&amp;nbsp;&lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;VARCHAR(10)&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="78" as="geometry" />
-        </mxCell>
-        <mxCell id="tbl_Aeronave_row2" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        licensed &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;BOOLEAN&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="104" as="geometry" />
-        </mxCell>
-        <mxCell id="tbl_Aeronave_row3" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        status (operational, under maintenance) &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(20)&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="130" as="geometry" />
-        </mxCell>        <mxCell id="tbl_Aeronave_reportrow4" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="aircraft_type VARCHAR(50)" vertex="1"><mxGeometry height="26" width="320" y="130" as="geometry" /></mxCell>
-        <mxCell id="tbl_Aeronave_reportrow5" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="passenger_capacity INT" vertex="1"><mxGeometry height="26" width="320" y="156" as="geometry" /></mxCell>
-        <mxCell id="tbl_Aeronave_reportrow6" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="cargo_capacity_kg DECIMAL(10,2)" vertex="1"><mxGeometry height="26" width="320" y="182" as="geometry" /></mxCell>
+        
+        
+        
+        
+        
+                
+        
+        
 
         <mxCell id="tbl_Companhia" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=12;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Company" vertex="1">
           <mxGeometry height="156" width="320" x="1836" y="-300" as="geometry" />
@@ -1297,33 +1273,17 @@
         <mxCell id="tbl_Setor_row2" parent="tbl_Setor" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        role &lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;VARCHAR(50)&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="320" y="78" as="geometry" />
         </mxCell>
-        <mxCell id="tbl_Solicitacao" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=12;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Request" vertex="1">
-          <mxGeometry height="312" width="320" x="1710" y="800" as="geometry" />
-        </mxCell>
-        <mxCell id="tbl_Solicitacao_row0" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=#fff2cc;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=1;overflow=visible;" value="PK  id_request &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="26" as="geometry" />
-        </mxCell>
-        <mxCell id="tbl_Solicitacao_row1" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=2;overflow=visible;" value="FK id_employee &lt;font color=&quot;#787878&quot;&gt;INT&lt;/font&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="52" as="geometry" />
-        </mxCell>
-        <mxCell id="XnllOryEV0r3wp6n1hLL-5" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=2;overflow=visible;" value="FK id_aircraft&amp;nbsp;&lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="78" as="geometry" />
-        </mxCell>
-        <mxCell id="tbl_Solicitacao_row3" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        date &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DATE&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="104" as="geometry" />
-        </mxCell>
-        <mxCell id="tbl_Solicitacao_row4" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        deadline &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DATE&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="130" as="geometry" />
-        </mxCell>
-        <mxCell id="tbl_Solicitacao_row5" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        content &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;TEXT&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="156" as="geometry" />
-        </mxCell>
-        <mxCell id="tbl_Solicitacao_row6" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontStyle=0;overflow=visible;" value="        status (under review, completed, accepted, rejected) &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(20)&lt;/span&gt;" vertex="1">
-          <mxGeometry height="26" width="320" y="182" as="geometry" />
-        </mxCell>        <mxCell id="tbl_Solicitacao_reportrow7" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="FK id_request_type INT" vertex="1"><mxGeometry height="26" width="320" y="208" as="geometry" /></mxCell>
-        <mxCell id="tbl_Solicitacao_reportrow8" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="analysis_start DATETIME" vertex="1"><mxGeometry height="26" width="320" y="234" as="geometry" /></mxCell>
-        <mxCell id="tbl_Solicitacao_reportrow9" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="analysis_end DATETIME" vertex="1"><mxGeometry height="26" width="320" y="260" as="geometry" /></mxCell>
-        <mxCell id="tbl_Solicitacao_reportrow10" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="decision_date DATETIME" vertex="1"><mxGeometry height="26" width="320" y="286" as="geometry" /></mxCell>
+        
+        
+        
+        
+        
+        
+        
+                
+        
+        
+        
 
         <mxCell id="tbl_TerceirosSolicitacoes" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#f5f5f5;fontStyle=1;fontSize=12;align=center;verticalAlign=middle;whiteSpace=wrap;" value="ThirdPartiesRequests" vertex="1">
           <mxGeometry height="78" width="320" x="1944" y="580" as="geometry" />
@@ -1412,36 +1372,187 @@
             <mxPoint x="770" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-              <mxCell id="reporting_fields" parent="1" style="swimlane;html=1;startSize=26;horizontal=1;collapsible=0;strokeColor=#666666;fillColor=#fff2cc;fontStyle=1;fontSize=12;align=center;verticalAlign=middle;whiteSpace=wrap;" value="New reporting fields" vertex="1"><mxGeometry height="134" width="430" x="2050" y="40" as="geometry" /></mxCell>
-        <mxCell id="reporting_fields_row0" parent="reporting_fields" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;" value="Infrastructure: under_maintenance BOOLEAN" vertex="1"><mxGeometry height="36" width="430" y="26" as="geometry" /></mxCell>
-        <mxCell id="reporting_fields_row1" parent="reporting_fields" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;" value="Aircraft: aircraft_type, passenger_capacity, cargo_capacity_kg" vertex="1"><mxGeometry height="36" width="430" y="62" as="geometry" /></mxCell>
-        <mxCell id="reporting_fields_row2" parent="reporting_fields" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;" value="Request: request_type FK, analysis_start, analysis_end, decision_date" vertex="1"><mxGeometry height="36" width="430" y="98" as="geometry" /></mxCell>
-        <mxCell id="tbl_TipoSolicitacao" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=12;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Request Type" vertex="1"><mxGeometry height="104" width="330" x="2050" y="230" as="geometry" /></mxCell>
-        <mxCell id="tbl_TipoSolicitacao_row0" parent="tbl_TipoSolicitacao" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="PK id_tipo_solicitacao INT" vertex="1"><mxGeometry height="26" width="330" y="26" as="geometry" /></mxCell>
-        <mxCell id="tbl_TipoSolicitacao_row1" parent="tbl_TipoSolicitacao" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="nome VARCHAR(80) UNIQUE" vertex="1"><mxGeometry height="26" width="330" y="52" as="geometry" /></mxCell>
-        <mxCell id="tbl_TipoSolicitacao_row2" parent="tbl_TipoSolicitacao" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="descricao VARCHAR(255)" vertex="1"><mxGeometry height="26" width="330" y="78" as="geometry" /></mxCell>
-        <mxCell id="tbl_ManutencaoInfraestrutura" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=12;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Infrastructure Maintenance" vertex="1"><mxGeometry height="208" width="360" x="2450" y="230" as="geometry" /></mxCell>
-        <mxCell id="tbl_ManutencaoInfraestrutura_row0" parent="tbl_ManutencaoInfraestrutura" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="PK id_maintenance INT" vertex="1"><mxGeometry height="26" width="360" y="26" as="geometry" /></mxCell>
-        <mxCell id="tbl_ManutencaoInfraestrutura_row1" parent="tbl_ManutencaoInfraestrutura" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="FK id_infrastructure INT" vertex="1"><mxGeometry height="26" width="360" y="52" as="geometry" /></mxCell>
-        <mxCell id="tbl_ManutencaoInfraestrutura_row2" parent="tbl_ManutencaoInfraestrutura" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="start_date DATETIME" vertex="1"><mxGeometry height="26" width="360" y="78" as="geometry" /></mxCell>
-        <mxCell id="tbl_ManutencaoInfraestrutura_row3" parent="tbl_ManutencaoInfraestrutura" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="expected_end DATETIME" vertex="1"><mxGeometry height="26" width="360" y="104" as="geometry" /></mxCell>
-        <mxCell id="tbl_ManutencaoInfraestrutura_row4" parent="tbl_ManutencaoInfraestrutura" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="end_date DATETIME NULL" vertex="1"><mxGeometry height="26" width="360" y="130" as="geometry" /></mxCell>
-        <mxCell id="tbl_ManutencaoInfraestrutura_row5" parent="tbl_ManutencaoInfraestrutura" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="description VARCHAR(255)" vertex="1"><mxGeometry height="26" width="360" y="156" as="geometry" /></mxCell>
-        <mxCell id="tbl_ManutencaoInfraestrutura_row6" parent="tbl_ManutencaoInfraestrutura" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="status VARCHAR(20)" vertex="1"><mxGeometry height="26" width="360" y="182" as="geometry" /></mxCell>
-        <mxCell id="tbl_IncidenteOperacional" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=12;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Operational Incident" vertex="1"><mxGeometry height="234" width="360" x="2450" y="520" as="geometry" /></mxCell>
-        <mxCell id="tbl_IncidenteOperacional_row0" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="PK id_incident INT" vertex="1"><mxGeometry height="26" width="360" y="26" as="geometry" /></mxCell>
-        <mxCell id="tbl_IncidenteOperacional_row1" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="FK id_route_operation INT NULL" vertex="1"><mxGeometry height="26" width="360" y="52" as="geometry" /></mxCell>
-        <mxCell id="tbl_IncidenteOperacional_row2" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="FK id_infrastructure INT NULL" vertex="1"><mxGeometry height="26" width="360" y="78" as="geometry" /></mxCell>
-        <mxCell id="tbl_IncidenteOperacional_row3" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="date_time DATETIME" vertex="1"><mxGeometry height="26" width="360" y="104" as="geometry" /></mxCell>
-        <mxCell id="tbl_IncidenteOperacional_row4" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="type VARCHAR(50)" vertex="1"><mxGeometry height="26" width="360" y="130" as="geometry" /></mxCell>
-        <mxCell id="tbl_IncidenteOperacional_row5" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="severity VARCHAR(20)" vertex="1"><mxGeometry height="26" width="360" y="156" as="geometry" /></mxCell>
-        <mxCell id="tbl_IncidenteOperacional_row6" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="description TEXT" vertex="1"><mxGeometry height="26" width="360" y="182" as="geometry" /></mxCell>
-        <mxCell id="tbl_IncidenteOperacional_row7" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;overflow=visible;" value="status VARCHAR(20)" vertex="1"><mxGeometry height="26" width="360" y="208" as="geometry" /></mxCell>
-        <mxCell id="fk_request_type_request" edge="1" parent="1" source="tbl_Solicitacao" target="tbl_TipoSolicitacao" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;strokeColor=#666666;" value="N:1"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="fk_maintenance_infrastructure" edge="1" parent="1" source="tbl_ManutencaoInfraestrutura" target="tbl_Infraestrutura" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;strokeColor=#666666;" value="N:1"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="fk_incident_infrastructure" edge="1" parent="1" source="tbl_IncidenteOperacional" target="tbl_Infraestrutura" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;strokeColor=#666666;" value="N:1"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="fk_incident_route" edge="1" parent="1" source="tbl_IncidenteOperacional" target="tbl_OperacaoDeRota" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;strokeColor=#666666;" value="N:1"><mxGeometry relative="1" as="geometry" /></mxCell>
-</root>
+              
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+<mxCell id="tbl_Infraestrutura" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Infrastructure" vertex="1">
+          <mxGeometry height="182" width="320" x="-160" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Infraestrutura_row0" parent="tbl_Infraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=#fff2cc;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=1;overflow=visible;" value="PK id_infrastructure &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Infraestrutura_row1" parent="tbl_Infraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="location &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(100) UNIQUE&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Infraestrutura_row2" parent="tbl_Infraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="occupied &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;BOOLEAN NOT NULL DEFAULT FALSE&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Infraestrutura_row3" parent="tbl_Infraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="width &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DECIMAL(6,2)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="104" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Infraestrutura_row4" parent="tbl_Infraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="length &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DECIMAL(6,2)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Infraestrutura_row5" parent="tbl_Infraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="under_maintenance &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;BOOLEAN NOT NULL DEFAULT FALSE&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="156" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Aeronave" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Aircraft" vertex="1">
+          <mxGeometry height="234" width="320" x="1190" y="-234" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Aeronave_row0" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=#fff2cc;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=1;overflow=visible;" value="PK id_aircraft &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="XnllOryEV0r3wp6n1hLL-4" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=2;overflow=visible;" value="FK id_company &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Aeronave_row1" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=2;overflow=visible;" value="code &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(10) UNIQUE&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="z14id-eO3OD-H6_Z-Y0T-2" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="aircraft_type &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(50) NOT NULL DEFAULT 'Não informado'&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="104" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Aeronave_row2" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="licensed &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;BOOLEAN&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Aeronave_row3" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="status (operational, under maintenance) &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(20)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="156" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Aeronave_row4" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="passenger_capacity &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT NOT NULL DEFAULT 0&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="182" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Aeronave_row5" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="cargo_capacity_kg &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DECIMAL(10,2) NOT NULL DEFAULT 0&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="208" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Solicitacao" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Request" vertex="1">
+          <mxGeometry height="312" width="430" x="1720" y="920" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Solicitacao_row0" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=#fff2cc;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=1;overflow=visible;" value="PK id_request &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="430" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Solicitacao_row1" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=2;overflow=visible;" value="FK id_employee &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="430" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="XnllOryEV0r3wp6n1hLL-5" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=2;overflow=visible;" value="FK id_aircraft &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="430" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Solicitacao_row3" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="request_date &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DATETIME DEFAULT CURRENT_TIMESTAMP&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="430" y="104" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Solicitacao_row4" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="deadline &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DATETIME&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="430" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Solicitacao_row5" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="content &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;TEXT&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="430" y="156" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Solicitacao_row6" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="status (under review, completed, accepted, rejected) &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(20)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="430" y="182" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Solicitacao_row7" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=2;overflow=visible;" value="FK id_request_type &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT NOT NULL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="430" y="208" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Solicitacao_row8" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="analysis_start &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DATETIME&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="430" y="234" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Solicitacao_row9" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="analysis_end &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DATETIME&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="430" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_Solicitacao_row10" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="decision_date &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DATETIME&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="430" y="286" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_TipoSolicitacao" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="RequestType" vertex="1">
+          <mxGeometry height="104" width="320" x="2170" y="920" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_TipoSolicitacao_row0" parent="tbl_TipoSolicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=#fff2cc;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=1;overflow=visible;" value="PK id_request_type &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_TipoSolicitacao_row1" parent="tbl_TipoSolicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="name &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(80) UNIQUE&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_TipoSolicitacao_row2" parent="tbl_TipoSolicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="description &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(255)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_ManutencaoInfraestrutura" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="InfrastructureMaintenance" vertex="1">
+          <mxGeometry height="208" width="320" x="-600" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_ManutencaoInfraestrutura_row0" parent="tbl_ManutencaoInfraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=#fff2cc;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=1;overflow=visible;" value="PK id_maintenance &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_ManutencaoInfraestrutura_row1" parent="tbl_ManutencaoInfraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=2;overflow=visible;" value="FK id_infrastructure &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT NOT NULL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_ManutencaoInfraestrutura_row2" parent="tbl_ManutencaoInfraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="start_date &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DATETIME NOT NULL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_ManutencaoInfraestrutura_row3" parent="tbl_ManutencaoInfraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="expected_end &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DATETIME NOT NULL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="104" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_ManutencaoInfraestrutura_row4" parent="tbl_ManutencaoInfraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="end_date &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DATETIME NULL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_ManutencaoInfraestrutura_row5" parent="tbl_ManutencaoInfraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="description &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(255) NOT NULL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="156" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_ManutencaoInfraestrutura_row6" parent="tbl_ManutencaoInfraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="status &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(20) NOT NULL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="182" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_IncidenteOperacional" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="OperationalIncident" vertex="1">
+          <mxGeometry height="234" width="320" x="650" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_IncidenteOperacional_row0" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=#fff2cc;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=1;overflow=visible;" value="PK id_incident &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_IncidenteOperacional_row1" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=2;overflow=visible;" value="FK id_route_operation &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT NULL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_IncidenteOperacional_row2" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=2;overflow=visible;" value="FK id_infrastructure &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT NULL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_IncidenteOperacional_row3" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="date_time &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DATETIME NOT NULL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="104" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_IncidenteOperacional_row4" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="type &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(50) NOT NULL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_IncidenteOperacional_row5" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="severity &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(20) NOT NULL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="156" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_IncidenteOperacional_row6" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="description &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;TEXT NOT NULL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="182" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_IncidenteOperacional_row7" parent="tbl_IncidenteOperacional" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="status &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(20) NOT NULL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="26" width="320" y="208" as="geometry" />
+        </mxCell>
+        <mxCell id="fk_request_type_request" edge="1" parent="1" source="tbl_Solicitacao_row7" target="tbl_TipoSolicitacao" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=1;endSize=6;startArrow=none;strokeColor=#666666;jettySize=auto;orthogonalLoop=1;" value=""><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="fk_maintenance_infrastructure" edge="1" parent="1" source="tbl_ManutencaoInfraestrutura_row1" target="tbl_Infraestrutura" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=1;endSize=6;startArrow=none;strokeColor=#666666;jettySize=auto;orthogonalLoop=1;" value=""><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="fk_incident_infrastructure" edge="1" parent="1" source="tbl_IncidenteOperacional_row2" target="tbl_Infraestrutura" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=1;endSize=6;startArrow=none;strokeColor=#666666;jettySize=auto;orthogonalLoop=1;" value=""><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="fk_incident_route" edge="1" parent="1" source="tbl_IncidenteOperacional_row1" target="tbl_OperacaoDeRota" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endFill=1;endSize=6;startArrow=none;strokeColor=#666666;jettySize=auto;orthogonalLoop=1;" value=""><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
     </mxGraphModel>
   </diagram>
 </mxfile>
