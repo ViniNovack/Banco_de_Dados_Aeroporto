@@ -63,6 +63,13 @@ INSERT INTO Infraestrutura (id_infraestrutura, localizacao, ocupado, largura, co
 (41, 'Portão T3-09 - Terminal 3', FALSE, 40.00, 45.00),
 (42, 'Portão T3-10 - Terminal 3', TRUE, 40.00, 45.00);
 
+-- Manutenção de infraestrutura: histórico e situação atual (id 8 está em manutenção no cenário de referência)
+UPDATE Infraestrutura SET em_manutencao = TRUE WHERE id_infraestrutura = 8;
+INSERT INTO Manutencao_Infraestrutura
+    (id_manutencao, id_infraestrutura, data_inicio, previsao_termino, data_termino, descricao, status) VALUES
+(1, 8, '2026-09-22 08:00:00', '2026-09-25 18:00:00', NULL, 'Inspeção e reparo de pavimento da Taxiway Charlie', 'Em andamento'),
+(2, 9, '2026-09-10 07:00:00', '2026-09-11 18:00:00', '2026-09-11 16:30:00', 'Pintura de sinalização horizontal da Taxiway Delta', 'Concluída');
+
 -- Hangar
 INSERT INTO Hangar (id_hangar, capacidade, tipo, area) VALUES
 (1, 4, 'Manutenção pesada', 5200.00),
@@ -2876,6 +2883,14 @@ INSERT INTO operacoes_rota_funcionario (id_operacao_rota, id_funcionario) VALUES
 (360, 33),
 (360, 37);
 
+-- Tipos de solicitação: cadastrados antes das solicitações para respeitar a chave estrangeira
+INSERT INTO Tipo_Solicitacao (id_tipo_solicitacao, nome, descricao) VALUES
+(1, 'Manutenção de aeronave', 'Manutenção programada ou corretiva de aeronave'),
+(2, 'Inspeção de segurança', 'Vistoria, inspeção técnica e liberação de segurança'),
+(3, 'Autorização operacional', 'Autorizações de voo, pátio ou operação especial'),
+(4, 'Infraestrutura aeroportuária', 'Reserva, troca de portão e serviços de infraestrutura'),
+(5, 'Abastecimento e carga', 'Abastecimento e acesso à área de cargas');
+
 -- solicitacao (101)
 INSERT INTO solicitacao (id_solicitacao, id_funcionario, id_aeronave, data_solicitacao, prazo, conteudo, status) VALUES
 (1, 8, 29, '2026-09-17 09:45:00', '2026-09-19 14:45:00', 'Solicitação de vaga em hangar para manutenção programada', 'Concluída'),
@@ -3103,3 +3118,51 @@ INSERT INTO terceiros_solicitacoes (id_terceiro, id_solicitacao) VALUES
 (54, 99),
 (56, 100),
 (54, 101);
+
+-- Complemento dos dados de demonstração para os relatórios.
+-- A classificação é derivada do texto da carga fictícia e pode ser ajustada conforme dados reais.
+UPDATE solicitacao
+SET id_tipo_solicitacao = CASE
+    WHEN LOWER(conteudo) LIKE '%manutenção%' OR LOWER(conteudo) LIKE '%hangar%' OR LOWER(conteudo) LIKE '%pós-manutenção%' THEN 1
+    WHEN LOWER(conteudo) LIKE '%inspeção%' OR LOWER(conteudo) LIKE '%vistoria%' OR LOWER(conteudo) LIKE '%segurança%' THEN 2
+    WHEN LOWER(conteudo) LIKE '%autorização%' OR LOWER(conteudo) LIKE '%decolagem%' OR LOWER(conteudo) LIKE '%voo%' OR LOWER(conteudo) LIKE '%licença%' THEN 3
+    WHEN LOWER(conteudo) LIKE '%portão%' OR LOWER(conteudo) LIKE '%pátio%' OR LOWER(conteudo) LIKE '%posição%' THEN 4
+    ELSE 5
+END,
+data_inicio_analise = DATE_ADD(data_solicitacao, INTERVAL 10 MINUTE),
+data_fim_analise = CASE
+    WHEN LOWER(status) IN ('pendente', 'em análise', 'em analise') THEN NULL
+    ELSE DATE_ADD(data_solicitacao, INTERVAL (30 + MOD(id_solicitacao, 180)) MINUTE)
+END,
+data_decisao = CASE
+    WHEN LOWER(status) IN ('pendente', 'em análise', 'em analise') THEN NULL
+    ELSE DATE_ADD(data_solicitacao, INTERVAL (60 + MOD(id_solicitacao, 360)) MINUTE)
+END;
+
+-- Especificações fictícias de frota para demonstrar tipo e capacidade.
+UPDATE aeronave
+SET tipo_aeronave = CASE
+        WHEN id_aeronave BETWEEN 1 AND 20 THEN 'Narrow-body (A320/B737)'
+        WHEN id_aeronave BETWEEN 21 AND 32 THEN 'Wide-body (A330/B787)'
+        WHEN id_aeronave BETWEEN 33 AND 42 THEN 'Cargueiro'
+        ELSE 'Regional (E-Jet/ATR)'
+    END,
+    capacidade_passageiros = CASE
+        WHEN id_aeronave BETWEEN 1 AND 20 THEN 180
+        WHEN id_aeronave BETWEEN 21 AND 32 THEN 320
+        WHEN id_aeronave BETWEEN 33 AND 42 THEN 0
+        ELSE 90
+    END,
+    capacidade_carga_kg = CASE
+        WHEN id_aeronave BETWEEN 1 AND 20 THEN 20000
+        WHEN id_aeronave BETWEEN 21 AND 32 THEN 50000
+        WHEN id_aeronave BETWEEN 33 AND 42 THEN 100000
+        ELSE 10000
+    END;
+
+-- Incidentes fictícios para alimentar o relatório operacional diário.
+INSERT INTO Incidente_Operacional
+    (id_incidente, id_operacao_rota, id_infraestrutura, data_hora, tipo, gravidade, descricao, status) VALUES
+(1, 15, 6, '2026-09-23 08:25:00', 'Atraso em movimentação', 'Baixa', 'Atraso de taxiamento por inspeção de pavimento.', 'Encerrado'),
+(2, 22, 14, '2026-09-23 09:10:00', 'Falha de equipamento', 'Média', 'Equipamento de apoio no portão precisou ser substituído.', 'Em apuração'),
+(3, NULL, 8, '2026-09-22 11:40:00', 'Condição de infraestrutura', 'Média', 'Irregularidade detectada durante inspeção da taxiway.', 'Em apuração');
