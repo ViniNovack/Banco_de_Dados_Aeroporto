@@ -1002,7 +1002,7 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="tbl_Infraestrutura" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Infraestrutura" vertex="1">
-          <mxGeometry height="156" width="320" x="-160" y="170" as="geometry" />
+          <mxGeometry height="182" width="320" x="-160" y="170" as="geometry" />
         </mxCell>
         <mxCell id="tbl_Infraestrutura_row0" parent="tbl_Infraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=#fff2cc;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=1;overflow=visible;" value="PK  id_infraestrutura &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="320" y="26" as="geometry" />
@@ -1018,7 +1018,8 @@
         </mxCell>
         <mxCell id="tbl_Infraestrutura_row4" parent="tbl_Infraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="        comprimento &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;DECIMAL(6,2)&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="320" y="130" as="geometry" />
-        </mxCell>
+        </mxCell>        <mxCell id="tbl_Infraestrutura_reportrow5" parent="tbl_Infraestrutura" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="em_manutencao BOOLEAN DEFAULT FALSE" vertex="1"><mxGeometry height="26" width="320" y="156" as="geometry" /></mxCell>
+
         <mxCell id="tbl_AreaDeManobra" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="AreaDeManobra" vertex="1">
           <mxGeometry height="132" width="320" x="-650" y="540" as="geometry" />
         </mxCell>
@@ -1098,7 +1099,7 @@
           <mxGeometry height="26" width="320" y="104" as="geometry" />
         </mxCell>
         <mxCell id="tbl_Aeronave" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Aeronave" vertex="1">
-          <mxGeometry height="130" width="320" x="1190" y="-234" as="geometry" />
+          <mxGeometry height="208" width="320" x="1190" y="-234" as="geometry" />
         </mxCell>
         <mxCell id="tbl_Aeronave_row0" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=#fff2cc;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=1;overflow=visible;" value="PK id_aeronave&amp;nbsp;&lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="320" y="26" as="geometry" />
@@ -1117,7 +1118,10 @@
         </mxCell>
         <mxCell id="tbl_Aeronave_row3" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="        status (operante, em manutenção) &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;VARCHAR(20)&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="320" y="156" as="geometry" />
-        </mxCell>
+        </mxCell>        <mxCell id="tbl_Aeronave_reportrow4" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="tipo_aeronave VARCHAR(50)" vertex="1"><mxGeometry height="26" width="320" y="130" as="geometry" /></mxCell>
+        <mxCell id="tbl_Aeronave_reportrow5" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="capacidade_passageiros INT" vertex="1"><mxGeometry height="26" width="320" y="156" as="geometry" /></mxCell>
+        <mxCell id="tbl_Aeronave_reportrow6" parent="tbl_Aeronave" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="capacidade_carga_kg DECIMAL(10,2)" vertex="1"><mxGeometry height="26" width="320" y="182" as="geometry" /></mxCell>
+
         <mxCell id="tbl_Companhia" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Companhia" vertex="1">
           <mxGeometry height="156" width="320" x="1836" y="-300" as="geometry" />
         </mxCell>
@@ -1260,7 +1264,7 @@
           <mxGeometry height="26" width="320" y="78" as="geometry" />
         </mxCell>
         <mxCell id="tbl_Solicitacao" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Solicitacao" vertex="1">
-          <mxGeometry height="208" width="430" x="1720" y="920" as="geometry" />
+          <mxGeometry height="312" width="430" x="1720" y="920" as="geometry" />
         </mxCell>
         <mxCell id="tbl_Solicitacao_row0" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=#fff2cc;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=1;overflow=visible;" value="PK  id_solicitacao &lt;span style=&quot;color:#888888;font-style:italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="430" y="26" as="geometry" />
@@ -1282,7 +1286,11 @@
         </mxCell>
         <mxCell id="tbl_Solicitacao_row6" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=0;overflow=visible;" value="        status (em análise, concluída, aceita, recusada) &lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;VARCHAR(20) DEFAULT &quot;em análise&quot;&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="430" y="182" as="geometry" />
-        </mxCell>
+        </mxCell>        <mxCell id="tbl_Solicitacao_reportrow7" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="FK id_tipo_solicitacao INT" vertex="1"><mxGeometry height="26" width="320" y="208" as="geometry" /></mxCell>
+        <mxCell id="tbl_Solicitacao_reportrow8" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="data_inicio_analise DATETIME" vertex="1"><mxGeometry height="26" width="320" y="234" as="geometry" /></mxCell>
+        <mxCell id="tbl_Solicitacao_reportrow9" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="data_fim_analise DATETIME" vertex="1"><mxGeometry height="26" width="320" y="260" as="geometry" /></mxCell>
+        <mxCell id="tbl_Solicitacao_reportrow10" parent="tbl_Solicitacao" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=none;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=10;fontStyle=0;overflow=visible;" value="data_decisao DATETIME" vertex="1"><mxGeometry height="26" width="320" y="286" as="geometry" /></mxCell>
+
         <mxCell id="tbl_TerceirosSolicitacoes" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#f5f5f5;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="TerceirosSolicitacoes" vertex="1">
           <mxGeometry height="78" width="320" x="1970" y="720" as="geometry" />
         </mxCell>
