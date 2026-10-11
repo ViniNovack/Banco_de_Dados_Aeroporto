@@ -6,26 +6,26 @@
 -- =====================================================================
 SET FOREIGN_KEY_CHECKS = 0;
 
-TRUNCATE TABLE terceiros_solicitacoes;
-TRUNCATE TABLE operacoes_rota_funcionario;
-TRUNCATE TABLE Incidente_Operacional;
-TRUNCATE TABLE Manutencao_Infraestrutura;
-TRUNCATE TABLE Operacao_de_Solo;
-TRUNCATE TABLE solicitacao;
-TRUNCATE TABLE terceiro;
-TRUNCATE TABLE funcionario;
-TRUNCATE TABLE Operacao_de_Rota;
-TRUNCATE TABLE Pista_de_Taxi;
-TRUNCATE TABLE Pista;
-TRUNCATE TABLE Portao;
-TRUNCATE TABLE Area_de_Manobra;
-TRUNCATE TABLE Hangar;
-TRUNCATE TABLE aeronave;
-TRUNCATE TABLE Tipo_Solicitacao;
-TRUNCATE TABLE usuario;
-TRUNCATE TABLE setor;
-TRUNCATE TABLE companhia;
-TRUNCATE TABLE Infraestrutura;
+DELETE FROM terceiros_solicitacoes;
+DELETE FROM operacoes_rota_funcionario;
+DELETE FROM Incidente_Operacional;
+DELETE FROM Manutencao_Infraestrutura;
+DELETE FROM Operacao_de_Solo;
+DELETE FROM solicitacao;
+DELETE FROM terceiro;
+DELETE FROM funcionario;
+DELETE FROM Operacao_de_Rota;
+DELETE FROM Pista_de_Taxi;
+DELETE FROM Pista;
+DELETE FROM Portao;
+DELETE FROM Area_de_Manobra;
+DELETE FROM Hangar;
+DELETE FROM aeronave;
+DELETE FROM Tipo_Solicitacao;
+DELETE FROM usuario;
+DELETE FROM setor;
+DELETE FROM companhia;
+DELETE FROM Infraestrutura;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
