@@ -63,6 +63,13 @@ INSERT INTO Infraestrutura (id_infraestrutura, localizacao, ocupado, largura, co
 (41, 'Portão T3-09 - Terminal 3', FALSE, 40.00, 45.00),
 (42, 'Portão T3-10 - Terminal 3', TRUE, 40.00, 45.00);
 
+-- Manutenção de infraestrutura: histórico e situação atual (id 8 está em manutenção no cenário de referência)
+UPDATE Infraestrutura SET em_manutencao = TRUE WHERE id_infraestrutura = 8;
+INSERT INTO Manutencao_Infraestrutura
+    (id_manutencao, id_infraestrutura, data_inicio, previsao_termino, data_termino, descricao, status) VALUES
+(1, 8, '2026-09-22 08:00:00', '2026-09-25 18:00:00', NULL, 'Inspeção e reparo de pavimento da Taxiway Charlie', 'Em andamento'),
+(2, 9, '2026-09-10 07:00:00', '2026-09-11 18:00:00', '2026-09-11 16:30:00', 'Pintura de sinalização horizontal da Taxiway Delta', 'Concluída');
+
 -- Hangar
 INSERT INTO Hangar (id_hangar, capacidade, tipo, area) VALUES
 (1, 4, 'Manutenção pesada', 5200.00),
@@ -2876,6 +2883,14 @@ INSERT INTO operacoes_rota_funcionario (id_operacao_rota, id_funcionario) VALUES
 (360, 33),
 (360, 37);
 
+-- Tipos de solicitação: cadastrados antes das solicitações para respeitar a chave estrangeira
+INSERT INTO Tipo_Solicitacao (id_tipo_solicitacao, nome, descricao) VALUES
+(1, 'Manutenção de aeronave', 'Manutenção programada ou corretiva de aeronave'),
+(2, 'Inspeção de segurança', 'Vistoria, inspeção técnica e liberação de segurança'),
+(3, 'Autorização operacional', 'Autorizações de voo, pátio ou operação especial'),
+(4, 'Infraestrutura aeroportuária', 'Reserva, troca de portão e serviços de infraestrutura'),
+(5, 'Abastecimento e carga', 'Abastecimento e acesso à área de cargas');
+
 -- solicitacao (101)
 INSERT INTO solicitacao (id_solicitacao, id_funcionario, id_aeronave, data_solicitacao, prazo, conteudo, status) VALUES
 (1, 8, 29, '2026-09-17 09:45:00', '2026-09-19 14:45:00', 'Solicitação de vaga em hangar para manutenção programada', 'Concluída'),
@@ -3103,3 +3118,172 @@ INSERT INTO terceiros_solicitacoes (id_terceiro, id_solicitacao) VALUES
 (54, 99),
 (56, 100),
 (54, 101);
+
+-- Complemento dos dados de demonstração para os relatórios.
+-- A classificação é derivada do texto da carga fictícia e pode ser ajustada conforme dados reais.
+UPDATE solicitacao
+SET id_tipo_solicitacao = CASE
+    WHEN LOWER(conteudo) LIKE '%manutenção%' OR LOWER(conteudo) LIKE '%hangar%' OR LOWER(conteudo) LIKE '%pós-manutenção%' THEN 1
+    WHEN LOWER(conteudo) LIKE '%inspeção%' OR LOWER(conteudo) LIKE '%vistoria%' OR LOWER(conteudo) LIKE '%segurança%' THEN 2
+    WHEN LOWER(conteudo) LIKE '%autorização%' OR LOWER(conteudo) LIKE '%decolagem%' OR LOWER(conteudo) LIKE '%voo%' OR LOWER(conteudo) LIKE '%licença%' THEN 3
+    WHEN LOWER(conteudo) LIKE '%portão%' OR LOWER(conteudo) LIKE '%pátio%' OR LOWER(conteudo) LIKE '%posição%' THEN 4
+    ELSE 5
+END,
+data_inicio_analise = DATE_ADD(data_solicitacao, INTERVAL 10 MINUTE),
+data_fim_analise = CASE
+    WHEN LOWER(status) IN ('pendente', 'em análise', 'em analise') THEN NULL
+    ELSE DATE_ADD(data_solicitacao, INTERVAL (30 + MOD(id_solicitacao, 180)) MINUTE)
+END,
+data_decisao = CASE
+    WHEN LOWER(status) IN ('pendente', 'em análise', 'em analise') THEN NULL
+    ELSE DATE_ADD(data_solicitacao, INTERVAL (60 + MOD(id_solicitacao, 360)) MINUTE)
+END;
+
+-- Especificações fictícias de frota para demonstrar tipo e capacidade.
+UPDATE aeronave
+SET tipo_aeronave = CASE
+        WHEN id_aeronave BETWEEN 1 AND 20 THEN 'Narrow-body (A320/B737)'
+        WHEN id_aeronave BETWEEN 21 AND 32 THEN 'Wide-body (A330/B787)'
+        WHEN id_aeronave BETWEEN 33 AND 42 THEN 'Cargueiro'
+        ELSE 'Regional (E-Jet/ATR)'
+    END,
+    capacidade_passageiros = CASE
+        WHEN id_aeronave BETWEEN 1 AND 20 THEN 180
+        WHEN id_aeronave BETWEEN 21 AND 32 THEN 320
+        WHEN id_aeronave BETWEEN 33 AND 42 THEN 0
+        ELSE 90
+    END,
+    capacidade_carga_kg = CASE
+        WHEN id_aeronave BETWEEN 1 AND 20 THEN 20000
+        WHEN id_aeronave BETWEEN 21 AND 32 THEN 50000
+        WHEN id_aeronave BETWEEN 33 AND 42 THEN 100000
+        ELSE 10000
+    END;
+
+-- Incidentes fictícios para alimentar o relatório operacional diário.
+INSERT INTO Incidente_Operacional
+    (id_incidente, id_operacao_rota, id_infraestrutura, data_hora, tipo, gravidade, descricao, status) VALUES
+(1, 15, 6, '2026-09-23 08:25:00', 'Atraso em movimentação', 'Baixa', 'Atraso de taxiamento por inspeção de pavimento.', 'Encerrado'),
+(2, 22, 14, '2026-09-23 09:10:00', 'Falha de equipamento', 'Média', 'Equipamento de apoio no portão precisou ser substituído.', 'Em apuração'),
+(3, NULL, 8, '2026-09-22 11:40:00', 'Condição de infraestrutura', 'Média', 'Irregularidade detectada durante inspeção da taxiway.', 'Em apuração');
+
+
+-- Ampliação do volume de dados de manutenção e incidentes para aproximar os relatórios
+-- da escala do cenário (360 operações de rota e 101 solicitações).
+-- Histórico adicional de manutenção: 28 registros; os registros são históricos e não
+-- alteram o estado atual de em_manutencao definido no cenário de referência.
+INSERT INTO Manutencao_Infraestrutura
+    (id_manutencao, id_infraestrutura, data_inicio, previsao_termino, data_termino, descricao, status) VALUES
+(3, 7, '2026-08-20 06:00:00', '2026-08-22 23:59:00', '2026-08-22 14:00:00', 'Inspeção periódica do pavimento e tratamento de fissuras', 'Concluída'),
+(4, 14, '2026-08-21 07:13:00', '2026-08-22 23:59:00', '2026-08-22 15:17:00', 'Revisão de sinalização horizontal e marcas de posição', 'Concluída'),
+(5, 21, '2026-08-22 08:26:00', '2026-08-23 23:59:00', '2026-08-23 16:34:00', 'Verificação de iluminação e balizamento operacional', 'Concluída'),
+(6, 28, '2026-08-23 09:39:00', '2026-08-25 23:59:00', '2026-08-25 17:51:00', 'Manutenção preventiva de drenagem e escoamento pluvial', 'Concluída'),
+(7, 35, '2026-08-24 10:52:00', '2026-08-25 23:59:00', '2026-08-25 18:08:00', 'Reparo localizado de pavimento em área de circulação', 'Concluída'),
+(8, 42, '2026-08-25 11:05:00', '2026-08-26 23:59:00', '2026-08-26 14:25:00', 'Inspeção de juntas, pintura e demarcações de segurança', 'Concluída'),
+(9, 10, '2026-08-26 12:18:00', '2026-08-28 23:59:00', '2026-08-28 15:42:00', 'Calibração de equipamentos de apoio e sinalização', 'Cancelada'),
+(10, 17, '2026-08-27 13:31:00', '2026-08-28 23:59:00', '2026-08-28 16:59:00', 'Limpeza técnica e desobstrução de canaletas', 'Concluída'),
+(11, 24, '2026-08-28 14:44:00', '2026-08-29 23:59:00', '2026-08-29 17:16:00', 'Revisão de placas direcionais e sinalização vertical', 'Concluída'),
+(12, 31, '2026-08-29 06:57:00', '2026-08-31 23:59:00', '2026-08-31 18:33:00', 'Inspeção estrutural preventiva da área operacional', 'Concluída'),
+(13, 38, '2026-08-30 07:10:00', '2026-08-31 23:59:00', '2026-08-31 14:50:00', 'Manutenção de pontos de iluminação do pátio', 'Concluída'),
+(14, 6, '2026-08-31 08:23:00', '2026-09-01 23:59:00', '2026-09-01 15:07:00', 'Reparo de pequenas irregularidades na superfície', 'Concluída'),
+(15, 13, '2026-09-01 09:36:00', '2026-09-03 23:59:00', '2026-09-03 16:24:00', 'Revisão de sinalização de segurança no terminal', 'Concluída'),
+(16, 20, '2026-09-02 10:49:00', '2026-09-03 23:59:00', '2026-09-03 17:41:00', 'Inspeção preventiva de acesso e circulação de serviço', 'Concluída'),
+(17, 27, '2026-09-03 11:02:00', '2026-09-04 23:59:00', '2026-09-04 18:58:00', 'Inspeção periódica do pavimento e tratamento de fissuras', 'Concluída'),
+(18, 34, '2026-09-04 12:15:00', '2026-09-06 23:59:00', '2026-09-06 14:15:00', 'Revisão de sinalização horizontal e marcas de posição', 'Concluída'),
+(19, 41, '2026-09-05 13:28:00', '2026-09-06 23:59:00', '2026-09-06 15:32:00', 'Verificação de iluminação e balizamento operacional', 'Concluída'),
+(20, 9, '2026-09-06 14:41:00', '2026-09-07 23:59:00', '2026-09-07 16:49:00', 'Manutenção preventiva de drenagem e escoamento pluvial', 'Concluída'),
+(21, 16, '2026-09-07 06:54:00', '2026-09-09 23:59:00', '2026-09-09 17:06:00', 'Reparo localizado de pavimento em área de circulação', 'Concluída'),
+(22, 23, '2026-09-08 07:07:00', '2026-09-09 23:59:00', '2026-09-09 18:23:00', 'Inspeção de juntas, pintura e demarcações de segurança', 'Cancelada'),
+(23, 30, '2026-09-09 08:20:00', '2026-09-10 23:59:00', '2026-09-10 14:40:00', 'Calibração de equipamentos de apoio e sinalização', 'Concluída'),
+(24, 37, '2026-09-10 09:33:00', '2026-09-12 23:59:00', '2026-09-12 15:57:00', 'Limpeza técnica e desobstrução de canaletas', 'Concluída'),
+(25, 5, '2026-09-11 10:46:00', '2026-09-12 23:59:00', '2026-09-12 16:14:00', 'Revisão de placas direcionais e sinalização vertical', 'Concluída'),
+(26, 12, '2026-09-12 11:59:00', '2026-09-13 23:59:00', '2026-09-13 17:31:00', 'Inspeção estrutural preventiva da área operacional', 'Concluída'),
+(27, 19, '2026-09-13 12:12:00', '2026-09-15 23:59:00', '2026-09-15 18:48:00', 'Manutenção de pontos de iluminação do pátio', 'Concluída'),
+(28, 26, '2026-09-14 13:25:00', '2026-09-15 23:59:00', '2026-09-15 14:05:00', 'Reparo de pequenas irregularidades na superfície', 'Cancelada'),
+(29, 33, '2026-09-15 14:38:00', '2026-09-16 23:59:00', '2026-09-16 15:22:00', 'Revisão de sinalização de segurança no terminal', 'Concluída'),
+(30, 40, '2026-09-16 06:51:00', '2026-09-18 23:59:00', '2026-09-18 16:39:00', 'Inspeção preventiva de acesso e circulação de serviço', 'Concluída');
+
+-- Histórico ampliado de incidentes: 80 novos registros distribuídos ao longo dos dias
+-- que compõem o cenário de demonstração. Todos os registros são fictícios.
+INSERT INTO Incidente_Operacional
+    (id_incidente, id_operacao_rota, id_infraestrutura, data_hora, tipo, gravidade, descricao, status) VALUES
+(4, 15, 6, '2026-09-18 05:03:00', 'Atraso de operação', 'Alta', 'Coordenação de fluxo e reprogramação de sequência operacional. Registro de demonstração 004.', 'Em apuração'),
+(5, 32, 17, '2026-09-18 12:22:00', 'Falha de equipamento', 'Média', 'Equipamento de apoio apresentou falha e foi encaminhado para substituição. Registro de demonstração 005.', 'Registrado'),
+(6, 49, 28, '2026-09-18 19:41:00', 'Condição de infraestrutura', 'Média', 'Equipe de inspeção registrou irregularidade e isolou a área para avaliação. Registro de demonstração 006.', 'Encerrado'),
+(7, 66, 39, '2026-09-18 02:00:00', 'Acesso não autorizado', 'Alta', 'Acesso indevido à área operacional; segurança acionada para apuração. Registro de demonstração 007.', 'Encerrado'),
+(8, 83, 11, '2026-09-18 09:19:00', 'Derramamento de fluido', 'Alta', 'Pequeno derramamento identificado; área sinalizada para limpeza especializada. Registro de demonstração 008.', 'Encerrado'),
+(9, 100, 22, '2026-09-18 16:38:00', 'Avaria em equipamento de solo', 'Baixa', 'Equipamento de atendimento em solo apresentou avaria durante a preparação. Registro de demonstração 009.', 'Em apuração'),
+(10, 117, 33, '2026-09-18 23:57:00', 'Interferência em taxiamento', 'Média', 'Movimentação de solo precisou ser interrompida para manter separação segura. Registro de demonstração 010.', 'Registrado'),
+(11, 134, 5, '2026-09-18 06:16:00', 'Objeto estranho na pista', 'Alta', 'Objeto estranho detectado durante inspeção, com verificação da área. Registro de demonstração 011.', 'Encerrado'),
+(12, 151, 16, '2026-09-18 13:35:00', 'Falha de comunicação', 'Média', 'Interrupção temporária de comunicação reportada à equipe responsável. Registro de demonstração 012.', 'Encerrado'),
+(13, 168, 27, '2026-09-18 20:54:00', 'Atendimento médico', 'Média', 'Solicitado atendimento médico e registro do evento operacional. Registro de demonstração 013.', 'Encerrado'),
+(14, 185, 38, '2026-09-18 03:13:00', 'Atraso de operação', 'Baixa', 'Coordenação de fluxo e reprogramação de sequência operacional. Registro de demonstração 014.', 'Em apuração'),
+(15, 202, 10, '2026-09-18 10:32:00', 'Falha de equipamento', 'Média', 'Equipamento de apoio apresentou falha e foi encaminhado para substituição. Registro de demonstração 015.', 'Registrado'),
+(16, 219, 21, '2026-09-18 17:51:00', 'Condição de infraestrutura', 'Média', 'Equipe de inspeção registrou irregularidade e isolou a área para avaliação. Registro de demonstração 016.', 'Encerrado'),
+(17, 236, 32, '2026-09-18 00:10:00', 'Acesso não autorizado', 'Alta', 'Acesso indevido à área operacional; segurança acionada para apuração. Registro de demonstração 017.', 'Encerrado'),
+(18, 253, 4, '2026-09-19 07:29:00', 'Derramamento de fluido', 'Alta', 'Pequeno derramamento identificado; área sinalizada para limpeza especializada. Registro de demonstração 018.', 'Encerrado'),
+(19, 270, 15, '2026-09-19 14:48:00', 'Avaria em equipamento de solo', 'Baixa', 'Equipamento de atendimento em solo apresentou avaria durante a preparação. Registro de demonstração 019.', 'Em apuração'),
+(20, 287, 26, '2026-09-19 21:07:00', 'Interferência em taxiamento', 'Média', 'Movimentação de solo precisou ser interrompida para manter separação segura. Registro de demonstração 020.', 'Registrado'),
+(21, 304, 37, '2026-09-19 04:26:00', 'Objeto estranho na pista', 'Alta', 'Objeto estranho detectado durante inspeção, com verificação da área. Registro de demonstração 021.', 'Encerrado'),
+(22, 321, 9, '2026-09-19 11:45:00', 'Falha de comunicação', 'Média', 'Interrupção temporária de comunicação reportada à equipe responsável. Registro de demonstração 022.', 'Encerrado'),
+(23, 338, 20, '2026-09-19 18:04:00', 'Atendimento médico', 'Média', 'Solicitado atendimento médico e registro do evento operacional. Registro de demonstração 023.', 'Encerrado'),
+(24, 355, 31, '2026-09-19 01:23:00', 'Atraso de operação', 'Baixa', 'Coordenação de fluxo e reprogramação de sequência operacional. Registro de demonstração 024.', 'Em apuração'),
+(25, 12, 42, '2026-09-19 08:42:00', 'Falha de equipamento', 'Média', 'Equipamento de apoio apresentou falha e foi encaminhado para substituição. Registro de demonstração 025.', 'Registrado'),
+(26, 29, 14, '2026-09-19 15:01:00', 'Condição de infraestrutura', 'Média', 'Equipe de inspeção registrou irregularidade e isolou a área para avaliação. Registro de demonstração 026.', 'Encerrado'),
+(27, 46, 25, '2026-09-19 22:20:00', 'Acesso não autorizado', 'Alta', 'Acesso indevido à área operacional; segurança acionada para apuração. Registro de demonstração 027.', 'Encerrado'),
+(28, 63, 36, '2026-09-19 05:39:00', 'Derramamento de fluido', 'Alta', 'Pequeno derramamento identificado; área sinalizada para limpeza especializada. Registro de demonstração 028.', 'Encerrado'),
+(29, 80, 8, '2026-09-19 12:58:00', 'Avaria em equipamento de solo', 'Baixa', 'Equipamento de atendimento em solo apresentou avaria durante a preparação. Registro de demonstração 029.', 'Em apuração'),
+(30, 97, 19, '2026-09-19 19:17:00', 'Interferência em taxiamento', 'Média', 'Movimentação de solo precisou ser interrompida para manter separação segura. Registro de demonstração 030.', 'Registrado'),
+(31, 114, 30, '2026-09-19 02:36:00', 'Objeto estranho na pista', 'Alta', 'Objeto estranho detectado durante inspeção, com verificação da área. Registro de demonstração 031.', 'Encerrado'),
+(32, 131, 41, '2026-09-20 09:55:00', 'Falha de comunicação', 'Média', 'Interrupção temporária de comunicação reportada à equipe responsável. Registro de demonstração 032.', 'Encerrado'),
+(33, 148, 13, '2026-09-20 16:14:00', 'Atendimento médico', 'Média', 'Solicitado atendimento médico e registro do evento operacional. Registro de demonstração 033.', 'Encerrado'),
+(34, 165, 24, '2026-09-20 23:33:00', 'Atraso de operação', 'Baixa', 'Coordenação de fluxo e reprogramação de sequência operacional. Registro de demonstração 034.', 'Em apuração'),
+(35, 182, 35, '2026-09-20 06:52:00', 'Falha de equipamento', 'Média', 'Equipamento de apoio apresentou falha e foi encaminhado para substituição. Registro de demonstração 035.', 'Registrado'),
+(36, 199, 7, '2026-09-20 13:11:00', 'Condição de infraestrutura', 'Média', 'Equipe de inspeção registrou irregularidade e isolou a área para avaliação. Registro de demonstração 036.', 'Encerrado'),
+(37, 216, 18, '2026-09-20 20:30:00', 'Acesso não autorizado', 'Alta', 'Acesso indevido à área operacional; segurança acionada para apuração. Registro de demonstração 037.', 'Encerrado'),
+(38, 233, 29, '2026-09-20 03:49:00', 'Derramamento de fluido', 'Alta', 'Pequeno derramamento identificado; área sinalizada para limpeza especializada. Registro de demonstração 038.', 'Encerrado'),
+(39, 250, 40, '2026-09-20 10:08:00', 'Avaria em equipamento de solo', 'Baixa', 'Equipamento de atendimento em solo apresentou avaria durante a preparação. Registro de demonstração 039.', 'Em apuração'),
+(40, 267, 12, '2026-09-20 17:27:00', 'Interferência em taxiamento', 'Média', 'Movimentação de solo precisou ser interrompida para manter separação segura. Registro de demonstração 040.', 'Registrado'),
+(41, 284, 23, '2026-09-20 00:46:00', 'Objeto estranho na pista', 'Alta', 'Objeto estranho detectado durante inspeção, com verificação da área. Registro de demonstração 041.', 'Encerrado'),
+(42, 301, 34, '2026-09-20 07:05:00', 'Falha de comunicação', 'Média', 'Interrupção temporária de comunicação reportada à equipe responsável. Registro de demonstração 042.', 'Encerrado'),
+(43, 318, 6, '2026-09-20 14:24:00', 'Atendimento médico', 'Média', 'Solicitado atendimento médico e registro do evento operacional. Registro de demonstração 043.', 'Encerrado'),
+(44, 335, 17, '2026-09-20 21:43:00', 'Atraso de operação', 'Baixa', 'Coordenação de fluxo e reprogramação de sequência operacional. Registro de demonstração 044.', 'Em apuração'),
+(45, 352, 28, '2026-09-20 04:02:00', 'Falha de equipamento', 'Média', 'Equipamento de apoio apresentou falha e foi encaminhado para substituição. Registro de demonstração 045.', 'Registrado'),
+(46, 9, 39, '2026-09-21 11:21:00', 'Condição de infraestrutura', 'Média', 'Equipe de inspeção registrou irregularidade e isolou a área para avaliação. Registro de demonstração 046.', 'Encerrado'),
+(47, 26, 11, '2026-09-21 18:40:00', 'Acesso não autorizado', 'Alta', 'Acesso indevido à área operacional; segurança acionada para apuração. Registro de demonstração 047.', 'Encerrado'),
+(48, 43, 22, '2026-09-21 01:59:00', 'Derramamento de fluido', 'Alta', 'Pequeno derramamento identificado; área sinalizada para limpeza especializada. Registro de demonstração 048.', 'Encerrado'),
+(49, 60, 33, '2026-09-21 08:18:00', 'Avaria em equipamento de solo', 'Baixa', 'Equipamento de atendimento em solo apresentou avaria durante a preparação. Registro de demonstração 049.', 'Em apuração'),
+(50, 77, 5, '2026-09-21 15:37:00', 'Interferência em taxiamento', 'Média', 'Movimentação de solo precisou ser interrompida para manter separação segura. Registro de demonstração 050.', 'Registrado'),
+(51, 94, 16, '2026-09-21 22:56:00', 'Objeto estranho na pista', 'Alta', 'Objeto estranho detectado durante inspeção, com verificação da área. Registro de demonstração 051.', 'Encerrado'),
+(52, 111, 27, '2026-09-21 05:15:00', 'Falha de comunicação', 'Média', 'Interrupção temporária de comunicação reportada à equipe responsável. Registro de demonstração 052.', 'Encerrado'),
+(53, 128, 38, '2026-09-21 12:34:00', 'Atendimento médico', 'Média', 'Solicitado atendimento médico e registro do evento operacional. Registro de demonstração 053.', 'Encerrado'),
+(54, 145, 10, '2026-09-21 19:53:00', 'Atraso de operação', 'Baixa', 'Coordenação de fluxo e reprogramação de sequência operacional. Registro de demonstração 054.', 'Em apuração'),
+(55, 162, 21, '2026-09-21 02:12:00', 'Falha de equipamento', 'Alta', 'Equipamento de apoio apresentou falha e foi encaminhado para substituição. Registro de demonstração 055.', 'Registrado'),
+(56, 179, 32, '2026-09-21 09:31:00', 'Condição de infraestrutura', 'Média', 'Equipe de inspeção registrou irregularidade e isolou a área para avaliação. Registro de demonstração 056.', 'Encerrado'),
+(57, 196, 4, '2026-09-21 16:50:00', 'Acesso não autorizado', 'Alta', 'Acesso indevido à área operacional; segurança acionada para apuração. Registro de demonstração 057.', 'Encerrado'),
+(58, 213, 15, '2026-09-21 23:09:00', 'Derramamento de fluido', 'Alta', 'Pequeno derramamento identificado; área sinalizada para limpeza especializada. Registro de demonstração 058.', 'Encerrado'),
+(59, 230, 26, '2026-09-21 06:28:00', 'Avaria em equipamento de solo', 'Baixa', 'Equipamento de atendimento em solo apresentou avaria durante a preparação. Registro de demonstração 059.', 'Em apuração'),
+(60, 247, 37, '2026-09-22 13:47:00', 'Interferência em taxiamento', 'Média', 'Movimentação de solo precisou ser interrompida para manter separação segura. Registro de demonstração 060.', 'Registrado'),
+(61, 264, 9, '2026-09-22 20:06:00', 'Objeto estranho na pista', 'Alta', 'Objeto estranho detectado durante inspeção, com verificação da área. Registro de demonstração 061.', 'Encerrado'),
+(62, 281, 20, '2026-09-22 03:25:00', 'Falha de comunicação', 'Média', 'Interrupção temporária de comunicação reportada à equipe responsável. Registro de demonstração 062.', 'Encerrado'),
+(63, 298, 31, '2026-09-22 10:44:00', 'Atendimento médico', 'Média', 'Solicitado atendimento médico e registro do evento operacional. Registro de demonstração 063.', 'Encerrado'),
+(64, 315, 42, '2026-09-22 17:03:00', 'Atraso de operação', 'Baixa', 'Coordenação de fluxo e reprogramação de sequência operacional. Registro de demonstração 064.', 'Em apuração'),
+(65, 332, 14, '2026-09-22 00:22:00', 'Falha de equipamento', 'Média', 'Equipamento de apoio apresentou falha e foi encaminhado para substituição. Registro de demonstração 065.', 'Registrado'),
+(66, 349, 25, '2026-09-22 07:41:00', 'Condição de infraestrutura', 'Média', 'Equipe de inspeção registrou irregularidade e isolou a área para avaliação. Registro de demonstração 066.', 'Encerrado'),
+(67, 6, 36, '2026-09-22 14:00:00', 'Acesso não autorizado', 'Alta', 'Acesso indevido à área operacional; segurança acionada para apuração. Registro de demonstração 067.', 'Encerrado'),
+(68, 23, 8, '2026-09-22 21:19:00', 'Derramamento de fluido', 'Alta', 'Pequeno derramamento identificado; área sinalizada para limpeza especializada. Registro de demonstração 068.', 'Encerrado'),
+(69, 40, 19, '2026-09-22 04:38:00', 'Avaria em equipamento de solo', 'Baixa', 'Equipamento de atendimento em solo apresentou avaria durante a preparação. Registro de demonstração 069.', 'Em apuração'),
+(70, 57, 30, '2026-09-22 11:57:00', 'Interferência em taxiamento', 'Média', 'Movimentação de solo precisou ser interrompida para manter separação segura. Registro de demonstração 070.', 'Registrado'),
+(71, 74, 41, '2026-09-22 18:16:00', 'Objeto estranho na pista', 'Alta', 'Objeto estranho detectado durante inspeção, com verificação da área. Registro de demonstração 071.', 'Encerrado'),
+(72, 91, 13, '2026-09-22 01:35:00', 'Falha de comunicação', 'Alta', 'Interrupção temporária de comunicação reportada à equipe responsável. Registro de demonstração 072.', 'Encerrado'),
+(73, 108, 24, '2026-09-22 08:54:00', 'Atendimento médico', 'Média', 'Solicitado atendimento médico e registro do evento operacional. Registro de demonstração 073.', 'Encerrado'),
+(74, 125, 35, '2026-09-23 15:13:00', 'Atraso de operação', 'Baixa', 'Coordenação de fluxo e reprogramação de sequência operacional. Registro de demonstração 074.', 'Em apuração'),
+(75, 142, 7, '2026-09-23 22:32:00', 'Falha de equipamento', 'Média', 'Equipamento de apoio apresentou falha e foi encaminhado para substituição. Registro de demonstração 075.', 'Registrado'),
+(76, 159, 18, '2026-09-23 05:51:00', 'Condição de infraestrutura', 'Média', 'Equipe de inspeção registrou irregularidade e isolou a área para avaliação. Registro de demonstração 076.', 'Encerrado'),
+(77, 176, 29, '2026-09-23 12:10:00', 'Acesso não autorizado', 'Alta', 'Acesso indevido à área operacional; segurança acionada para apuração. Registro de demonstração 077.', 'Encerrado'),
+(78, 193, 40, '2026-09-23 19:29:00', 'Derramamento de fluido', 'Alta', 'Pequeno derramamento identificado; área sinalizada para limpeza especializada. Registro de demonstração 078.', 'Encerrado'),
+(79, 210, 12, '2026-09-23 02:48:00', 'Avaria em equipamento de solo', 'Baixa', 'Equipamento de atendimento em solo apresentou avaria durante a preparação. Registro de demonstração 079.', 'Em apuração'),
+(80, 227, 23, '2026-09-23 09:07:00', 'Interferência em taxiamento', 'Média', 'Movimentação de solo precisou ser interrompida para manter separação segura. Registro de demonstração 080.', 'Registrado'),
+(81, 244, 34, '2026-09-23 16:26:00', 'Objeto estranho na pista', 'Alta', 'Objeto estranho detectado durante inspeção, com verificação da área. Registro de demonstração 081.', 'Encerrado'),
+(82, 261, 6, '2026-09-23 23:45:00', 'Falha de comunicação', 'Média', 'Interrupção temporária de comunicação reportada à equipe responsável. Registro de demonstração 082.', 'Encerrado'),
+(83, 278, 17, '2026-09-23 06:04:00', 'Atendimento médico', 'Média', 'Solicitado atendimento médico e registro do evento operacional. Registro de demonstração 083.', 'Encerrado');

@@ -7,7 +7,8 @@ use gerenciador_de_pista_aeroporto;
  create table Infraestrutura(
 	id_infraestrutura int primary key auto_increment,
     localizacao varchar(100) UNIQUE,
-    ocupado boolean,
+    ocupado boolean NOT NULL DEFAULT FALSE,
+    em_manutencao boolean NOT NULL DEFAULT FALSE,
     largura decimal(6,2),
     comprimento decimal(6,2)
  );
@@ -66,6 +67,9 @@ create table aeronave(
 	id_aeronave int primary key auto_increment,
     id_companhia int,
     codigo varchar(10) UNIQUE,
+    tipo_aeronave varchar(50) NOT NULL DEFAULT 'Não informado',
+    capacidade_passageiros int NOT NULL DEFAULT 0,
+    capacidade_carga_kg decimal(10,2) NOT NULL DEFAULT 0,
     licenciada boolean,
     status varchar(20),
     foreign key(id_companhia)
@@ -97,6 +101,30 @@ create table aeronave(
     foreign key(proxima_operacao) references Operacao_de_Solo(id_operacao_solo)
  );
  
+
+create table Manutencao_Infraestrutura(
+    id_manutencao int primary key auto_increment,
+    id_infraestrutura int not null,
+    data_inicio datetime not null,
+    previsao_termino datetime not null,
+    data_termino datetime,
+    descricao varchar(255) not null,
+    status varchar(20) not null default 'Em andamento',
+    foreign key(id_infraestrutura) references Infraestrutura(id_infraestrutura)
+);
+
+create table Incidente_Operacional(
+    id_incidente int primary key auto_increment,
+    id_operacao_rota int,
+    id_infraestrutura int,
+    data_hora datetime not null,
+    tipo varchar(50) not null,
+    gravidade varchar(20) not null,
+    descricao text not null,
+    status varchar(20) not null default 'Registrado',
+    foreign key(id_operacao_rota) references Operacao_de_Rota(id_operacao_rota),
+    foreign key(id_infraestrutura) references Infraestrutura(id_infraestrutura)
+);
 
 create table usuario(
 	id_usuario int primary key auto_increment,
@@ -141,14 +169,25 @@ create table terceiro(
     foreign key(id_companhia) references companhia(id_companhia)
 );
 
+create table Tipo_Solicitacao(
+    id_tipo_solicitacao int primary key auto_increment,
+    nome varchar(80) not null unique,
+    descricao varchar(255)
+);
+
 create table solicitacao(
 	id_solicitacao int primary key auto_increment,
     id_funcionario int not null,
     id_aeronave int not null,
+    id_tipo_solicitacao int not null default 1,
     data_solicitacao datetime default (current_timestamp()),
     prazo datetime,
     conteudo text,
     status varchar(20),
+    data_inicio_analise datetime,
+    data_fim_analise datetime,
+    data_decisao datetime,
+    foreign key(id_tipo_solicitacao) references Tipo_Solicitacao(id_tipo_solicitacao),
     foreign key(id_funcionario) references funcionario(id_funcionario),
     foreign key(id_aeronave) references aeronave(id_aeronave)
 );
