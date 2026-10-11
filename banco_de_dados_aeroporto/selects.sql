@@ -112,7 +112,31 @@ group by s.status, c.id_companhia, c.nome
 order by s.status;
 
 -- Infraestrutura em manutenção (Pontos em manutenção com datas início e previsão término)
+select
+	case
+		when h.id_hangar is not null then 'Hangar'
+        when p.id_portao is not null then 'Portao'
+        when pi.id_pista is not null then 'Pista'
+        when ptx.id_pista_taxi is not null then 'Pista_de_Taxi'
+        when am.id_area_manobra is not null then 'Area_de_Manobra'
+	end as tipo_pista,
+    i.localizacao, mi.data_inicio, mi.previsao_termino
+ from infraestrutura as i
+ join manutencao_infraestrutura as mi on mi.id_infraestrutura = i.id_infraestrutura and mi.status = 'Em andamento'
+ left join portao as p on p.id_portao = i.id_infraestrutura
+ left join hangar as h on h.id_hangar = i.id_infraestrutura
+ left join area_de_manobra as am on am.id_area_manobra = i.id_infraestrutura
+ left join pista as pi on pi.id_pista = am.id_area_manobra
+ left join pista_de_taxi as ptx on ptx.id_pista_taxi = am.id_area_manobra
+ order by tipo_pista;
+ 
 -- Tempo de processamento (Por tipo solicitação: tempo médio análise e aprovação)
+select ts.id_tipo_solicitacao, ts.nome, round((round(avg(timestampdiff(minute, s.data_inicio_analise, s.data_decisao))))/60) as temp_horas, count(s.id_solicitacao) as qtd_aprovacoes from tipo_solicitacao as ts
+join solicitacao as s on s.id_tipo_solicitacao = ts.id_tipo_solicitacao
+where s.status in ('Aprovada', 'Concluída')
+group by ts.id_tipo_solicitacao, ts.nome
+order by qtd_aprovacoes desc;
+
 -- Frotas por companhia (Para companhia: tipos de aeronaves e capacidade)
 select c.nome, a.tipo_aeronave, count(a.id_aeronave) as qtd_aeronaves, a.capacidade_passageiros, a.capacidade_carga_kg from aeronave as a
 join companhia as c on c.id_companhia = a.id_companhia

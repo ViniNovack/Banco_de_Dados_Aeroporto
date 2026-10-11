@@ -996,7 +996,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Modelo Lógico" id="modeloLogico001">
-    <mxGraphModel dx="2524" dy="2747" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="2400" math="0" shadow="0">
+    <mxGraphModel dx="3528" dy="3123" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="2400" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1019,7 +1019,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="tbl_Hangar" parent="1" style="swimlane;html=1;startSize=26;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=0;resizeParentMax=0;collapsible=0;marginBottom=0;strokeColor=#666666;fillColor=#dae8fc;fontStyle=1;fontSize=15;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;" value="Hangar" vertex="1">
-          <mxGeometry height="132" width="320" x="-310" y="540" as="geometry" />
+          <mxGeometry height="132" width="320" x="-320" y="540" as="geometry" />
         </mxCell>
         <mxCell id="tbl_Hangar_row0" parent="tbl_Hangar" style="rounded=0;whiteSpace=nowrap;html=1;fillColor=#fff2cc;strokeColor=#666666;align=left;verticalAlign=middle;spacingLeft=8;fontSize=11;fontStyle=1;overflow=visible;" value="PK, FK&amp;nbsp; id_hangar &lt;span style=&quot;color: rgb(136, 136, 136); font-style: italic;&quot;&gt;INT&lt;/span&gt;" vertex="1">
           <mxGeometry height="26" width="320" y="26" as="geometry" />
