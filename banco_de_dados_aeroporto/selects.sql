@@ -144,3 +144,26 @@ group by a.tipo_aeronave, c.nome, c.id_companhia, a.capacidade_passageiros, a.ca
 order by c.nome, a.tipo_aeronave;
 
 -- Relatório operacional (Dashboard diário: pousos, decolagens, movimentações, incidentes)
+select c.nome as companhia, 
+	round(count(distinct r.id_operacao_rota) / p.dias, 2), 
+	round(coalesce(sum(r.objetivo = 'Voo internacional de passageiros'), 0) / p.dias, 2) as voo_internacional,
+	round(coalesce(sum(r.objetivo = 'Voo comercial de passageiros'), 0) / p.dias, 2) as voo_comercial,
+    round(coalesce(sum(r.objetivo = 'Voo cargueiro'), 0)) as voo_cargueiro,
+    round(coalesce(sum(r.objetivo = 'Translado para manutenção programada'), 0)) as translado_manutencao,
+    round(coalesce(sum(r.objetivo = 'Voo fretado'), 0)) as voo_fretado,
+    round(coalesce(sum(r.objetivo = 'Reposicionamento de aeronave'), 0)) as reposicionamento,
+    round(coalesce(sum(inc.qtd), 0) / p.dias, 2)
+from operacao_de_rota as r
+left join aeronave as a on a.id_aeronave = r.id_aeronave
+left join companhia as c on c.id_companhia = a.id_companhia
+cross join (
+	select datediff(max(date(data_inicio)), min(date(data_inicio))) + 1 as dias
+    from operacao_de_rota
+) as p
+left join(
+	select id_operacao_rota, count(*) as qtd
+    from incidente_operacional
+    group by id_operacao_rota
+) as inc on inc.id_operacao_rota = r.id_operacao_rota
+group by c.id_companhia, c.nome, p.dias
+order by companhia;
