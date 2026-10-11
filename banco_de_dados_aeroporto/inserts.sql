@@ -1,4 +1,35 @@
 -- =====================================================================
+-- IMPORTANTE: este arquivo recarrega os dados de demonstração do zero.
+-- Pode ser executado novamente: os registros existentes serão apagados
+-- antes da carga. Faça backup se houver dados que queira preservar.
+-- Execute primeiro creats.sql para criar o esquema.
+-- =====================================================================
+SET FOREIGN_KEY_CHECKS = 0;
+
+DELETE FROM terceiros_solicitacoes;
+DELETE FROM operacoes_rota_funcionario;
+DELETE FROM Incidente_Operacional;
+DELETE FROM Manutencao_Infraestrutura;
+DELETE FROM Operacao_de_Solo;
+DELETE FROM solicitacao;
+DELETE FROM terceiro;
+DELETE FROM funcionario;
+DELETE FROM Operacao_de_Rota;
+DELETE FROM Pista_de_Taxi;
+DELETE FROM Pista;
+DELETE FROM Portao;
+DELETE FROM Area_de_Manobra;
+DELETE FROM Hangar;
+DELETE FROM aeronave;
+DELETE FROM Tipo_Solicitacao;
+DELETE FROM usuario;
+DELETE FROM setor;
+DELETE FROM companhia;
+DELETE FROM Infraestrutura;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- =====================================================================
 -- inserts.sql - carga completa e coerente do banco gerenciador_de_pista_aeroporto
 -- Uso: 1) executar creats.sql   2) executar este arquivo.
 --
