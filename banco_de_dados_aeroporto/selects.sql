@@ -36,6 +36,7 @@ JOIN operacoes_rota_funcionario orf ON orf.id_operacao_rota = r.id_operacao_rota
 JOIN funcionario f ON f.id_funcionario = orf.id_funcionario
 JOIN usuario u ON u.id_usuario = f.id_funcionario
 JOIN setor s ON s.id_setor = f.id_setor;
+
 -- Operações de solo por companhia
 SELECT 
     c.nome AS nome_companhia,
@@ -48,6 +49,7 @@ FROM companhia c
 JOIN aeronave a ON a.id_companhia = c.id_companhia
 JOIN operacao_de_rota r ON r.id_aeronave = a.id_aeronave
 JOIN operacao_de_solo os ON os.id_operacao_rota = r.id_operacao_rota;
+
 -- Terceiros, companhia e solicitações
 SELECT 
     u.nome AS terceiro_nome,
@@ -61,6 +63,7 @@ JOIN usuario u ON u.id_usuario = t.id_terceiro
 JOIN companhia c ON c.id_companhia = t.id_companhia
 JOIN terceiros_solicitacoes ts ON ts.id_terceiro = t.id_terceiro
 JOIN solicitacao s ON s.id_solicitacao = ts.id_solicitacao;
+
 -- Solicitações por aeronave e funcionário responsável
 SELECT 
     s.id_solicitacao,
@@ -75,7 +78,6 @@ JOIN funcionario f ON f.id_funcionario = s.id_funcionario
 JOIN usuario u ON u.id_usuario = f.id_funcionario;
 
 -- Aeronaves sem nenhuma operação de rota
-
 SELECT 
     a.id_aeronave,
     a.codigo,
@@ -86,7 +88,6 @@ LEFT JOIN operacao_de_rota r ON r.id_aeronave = a.id_aeronave
 WHERE r.id_operacao_rota IS NULL;
 
 -- Pistas com designação, categoria ICAO e localização
-
 SELECT 
     p.designacao AS designacao_pista,
     p.peso_maximo_suportado,
@@ -98,7 +99,6 @@ JOIN area_de_manobra am ON am.id_area_manobra = p.id_pista
 JOIN infraestrutura i ON i.id_infraestrutura = am.id_area_manobra;
 
 -- Solicitações abertas por cada setor
-
 SELECT 
     st.nome AS setor,
     u.nome AS funcionario,
@@ -112,7 +112,6 @@ JOIN solicitacao s ON s.id_funcionario = f.id_funcionario
 WHERE s.status IN ('Pendente', 'Em análise', 'Em analise');
 
 -- Sequência de operações de solo encadeadas
-
 SELECT 
     atual.id_operacao_solo AS operacao_atual,
     atual.origem AS origem_atual,
@@ -124,7 +123,6 @@ FROM operacao_de_solo atual
 JOIN operacao_de_solo prox ON prox.id_operacao_solo = atual.proxima_operacao;
 
 -- Companhias com frota ativa expressiva
-
 SELECT 
     c.nome AS companhia,
     COUNT(a.id_aeronave) AS total_aeronaves
@@ -135,7 +133,6 @@ HAVING COUNT(a.id_aeronave) > 3
 ORDER BY total_aeronaves DESC;
 
 -- Aeronaves de uso intenso
-
 SELECT 
     a.codigo AS prefixo_aeronave,
     COUNT(r.id_operacao_rota) AS total_operacoes
@@ -146,7 +143,6 @@ HAVING COUNT(r.id_operacao_rota) > 10
 ORDER BY total_operacoes DESC;
 
 -- Setores de grande porte
-
 SELECT 
     s.nome AS setor,
     COUNT(f.id_funcionario) AS total_funcionarios
@@ -157,7 +153,6 @@ HAVING COUNT(f.id_funcionario) > 2
 ORDER BY total_funcionarios DESC;
 
 -- Origens com alto tráfego aéreo
-
 SELECT 
     r.origem,
     COUNT(r.id_operacao_rota) AS total_voos
@@ -167,7 +162,6 @@ HAVING COUNT(r.id_operacao_rota) > 20
 ORDER BY total_voos DESC;
 
 -- Tipos de solicitação mais recorrentes
-
 SELECT 
     ts.nome AS tipo_solicitacao,
     COUNT(s.id_solicitacao) AS total_solicitacoes
@@ -334,3 +328,6 @@ left join(
 ) as inc on inc.id_operacao_rota = r.id_operacao_rota
 group by c.id_companhia, c.nome, p.dias
 order by companhia;
+
+
+-- _____________________________________________________________Subquerys_____________________________________________________________
