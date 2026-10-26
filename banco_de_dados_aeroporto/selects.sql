@@ -331,3 +331,112 @@ order by companhia;
 
 
 -- _____________________________________________________________Subquerys_____________________________________________________________
+-- 1. Companhias que tiveram aeronaves em incidentes operacionais
+SELECT 
+    c.id_companhia,
+    c.nome AS companhia,
+    c.pais
+FROM companhia c
+WHERE EXISTS (
+    SELECT 1
+    FROM aeronave a
+    JOIN operacao_de_rota r ON r.id_aeronave = a.id_aeronave
+    JOIN incidente_operacional inc ON inc.id_operacao_rota = r.id_operacao_rota
+    WHERE a.id_companhia = c.id_companhia
+);
+
+
+-- 2. Pontos de infraestrutura que nunca passaram por manutenção
+SELECT 
+    i.id_infraestrutura,
+    i.localizacao
+FROM infraestrutura i
+WHERE i.id_infraestrutura NOT IN (
+    SELECT DISTINCT id_infraestrutura
+    FROM manutencao_infraestrutura
+);
+
+
+-- 3. Aeronaves com capacidade de passageiros maior que a média da frota
+SELECT 
+    a.id_aeronave,
+    a.codigo AS prefixo,
+    a.tipo_aeronave,
+    a.capacidade_passageiros
+FROM aeronave a
+WHERE a.capacidade_passageiros > (
+    SELECT AVG(capacidade_passageiros)
+    FROM aeronave
+    WHERE capacidade_passageiros > 0
+)
+ORDER BY a.capacidade_passageiros DESC;
+
+
+-- 4. Quantidade de solicitações abertas por cada setor
+SELECT 
+    s.nome AS setor,
+    (
+        SELECT COUNT(*)
+        FROM solicitacao sol
+        JOIN funcionario f ON f.id_funcionario = sol.id_funcionario
+        WHERE f.id_setor = s.id_setor
+    ) AS total_solicitacoes
+FROM setor s
+ORDER BY total_solicitacoes DESC;
+
+
+-- 5. Companhias com mais voos operados do que a média geral por companhia
+SELECT 
+    tabela.companhia,
+    tabela.total_voos
+FROM (
+    SELECT 
+        c.nome AS companhia,
+        COUNT(r.id_operacao_rota) AS total_voos
+    FROM companhia c
+    JOIN aeronave a ON a.id_companhia = c.id_companhia
+    JOIN operacao_de_rota r ON r.id_aeronave = a.id_aeronave
+    GROUP BY c.id_companhia, c.nome
+) AS tabela
+WHERE tabela.total_voos > (
+    SELECT AVG(sub.voos)
+    FROM (
+        SELECT COUNT(r2.id_operacao_rota) AS voos
+        FROM aeronave a2
+        JOIN operacao_de_rota r2 ON r2.id_aeronave = a2.id_aeronave
+        GROUP BY a2.id_companhia
+    ) AS sub
+)
+ORDER BY tabela.total_voos DESC;
+
+
+-- _____________________________________________________________Updates_____________________________________________________________
+
+-- UPDATE 1: Reativação de companhia aérea
+-- Justificativa: A companhia Rhein Luftfracht (id 7) quitou as taxas pendentes e teve sua autorização de voo reativada.
+UPDATE companhia
+SET status = 'Ativa'
+WHERE id_companhia = 7;
+
+
+-- UPDATE 2: Liberação de portão de embarque
+-- Justificativa: O voo no portão T1-02 (id 14) finalizou a decolagem, liberando o portão para as próximas aeronaves.
+UPDATE infraestrutura
+SET ocupado = FALSE
+WHERE id_infraestrutura = 14;
+
+
+-- UPDATE 3: Aprovação de solicitação de pátio
+-- Justificativa: A solicitação (id 101) foi analisada pela supervisão e aprovada para estacionamento no pátio.
+UPDATE solicitacao
+SET status = 'Aprovada',
+    data_decisao = '2026-09-23 10:30:00'
+WHERE id_solicitacao = 101;
+
+
+-- _____________________________________________________________Delete_____________________________________________________________
+
+-- DELETE 1: Remoção de ordem de manutenção cancelada
+-- Justificativa: A ordem de serviço de calibração (id 9) foi cancelada antes de iniciar, sendo excluída para limpar o histórico.
+DELETE FROM manutencao_infraestrutura
+WHERE id_manutencao = 9;
