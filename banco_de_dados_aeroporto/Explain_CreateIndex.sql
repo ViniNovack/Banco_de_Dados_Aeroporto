@@ -1,0 +1,4 @@
+-- ________________________Explain/Create Index________________________
+-- Consulta Escolhida
+-- Plano de Execução (EXPLAIN)
+-- Proposta de Otimização (CREATE INDEX)
